@@ -1,0 +1,1031 @@
+require:
+  - rubocop-performance
+  - rubocop-rspec
+
+AllCops:
+  DisplayStyleGuide: true
+  ExtraDetails: true
+  RSpec:
+    Patterns:
+      - _spec.rb
+      - "(?:^|/)spec/"
+  TargetRubyVersion: 2.4
+
+#################### Layout ###########################
+
+Layout/DotPosition:
+  Description: "Checks the position of the dot in multi-line method calls."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#consistent-multi-line-chains"
+  EnforcedStyle: leading
+
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+
+Layout/ExtraSpacing:
+  Description: "Do not use unnecessary spacing."
+  Enabled: true
+
+Layout/InitialIndentation:
+  Description: >-
+    Checks the indentation of the first non-blank non-comment line in a file.
+  Enabled: true
+
+Layout/LineLength:
+  Description: "Limit lines to 80 characters."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#80-character-limits"
+  Max: 80
+  Include:
+    - "lib/**/*"
+    - "spec/**/*"
+
+Layout/MultilineOperationIndentation:
+  Description: >-
+    Checks indentation of binary operations that span more than one line.
+  Enabled: true
+  EnforcedStyle: indented
+
+Layout/MultilineMethodCallIndentation:
+  Description: >-
+    Checks indentation of method calls with the dot operator
+    that span more than one line.
+  Enabled: true
+  EnforcedStyle: indented
+
+Layout/ParameterAlignment:
+  Description: "Here we check if the parameters on a multi-line method call or definition are aligned."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#no-double-indent"
+  Enabled: true
+
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+
+#################### Lint ##################################
+
+Lint/FlipFlop:
+  Description: "Checks for flip flops"
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#no-flip-flops"
+  Enabled: true
+
+Lint/AmbiguousOperator:
+  Description: >-
+    Checks for ambiguous operators in the first argument of a
+    method invocation without parentheses.
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#parens-as-args"
+  Enabled: true
+
+Lint/AmbiguousRegexpLiteral:
+  Description: >-
+    Checks for ambiguous regexp literals in the first argument of
+    a method invocation without parenthesis.
+  Enabled: true
+
+Lint/AssignmentInCondition:
+  Description: "Don't use assignment in conditions."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#safe-assignment-in-condition"
+  Enabled: true
+
+Lint/CircularArgumentReference:
+  Description: "Don't refer to the keyword argument in the default value."
+  Enabled: true
+
+Lint/DeprecatedClassMethods:
+  Description: "Check for deprecated class method calls."
+  Enabled: true
+
+Lint/DeprecatedOpenSSLConstant:
+  Description: "Algorithmic constants for OpenSSL::Cipher and OpenSSL::Digest deprecated since OpenSSL version 2.2.0. Prefer passing a string instead."
+  StyleGuide: "https://docs.rubocop.org/rubocop/cops_lint.html#lintdeprecatedopensslconstant"
+  Enabled: true
+
+Lint/DuplicateHashKey:
+  Description: "Check for duplicate keys in hash literals."
+  Enabled: true
+
+Lint/EachWithObjectArgument:
+  Description: "Check for immutable argument given to each_with_object."
+  Enabled: true
+
+Lint/ElseLayout:
+  Description: "Check for odd code arrangement in an else block."
+  Enabled: true
+
+Lint/FormatParameterMismatch:
+  Description: "The number of parameters to format/sprint must match the fields."
+  Enabled: true
+
+Lint/LiteralInInterpolation:
+  Description: "Checks for literals used in interpolation."
+  Enabled: true
+
+Lint/Loop:
+  Description: >-
+    Use Kernel#loop with break rather than begin/end/until or
+    begin/end/while for post-loop tests.
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#loop-with-break"
+  Enabled: true
+
+Lint/MixedRegexpCaptureTypes:
+  Description: "Do not mix named captures and numbered captures in a Regexp literal because numbered capture is ignored if they’re mixed. Replace numbered captures with non-capturing groupings or named captures."
+  StyleGuide: "https://docs.rubocop.org/rubocop/cops_lint.html#lintmixedregexpcapturetypes"
+  Enabled: true
+
+Lint/NestedMethodDefinition:
+  Description: "Do not use nested method definitions."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#no-nested-methods"
+  Enabled: true
+
+Lint/NonLocalExitFromIterator:
+  Description: "Do not use return in iterator to cause non-local exit."
+  Enabled: true
+
+Lint/ParenthesesAsGroupedExpression:
+  Description: >-
+    Checks for method calls with a space before the opening
+    parenthesis.
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#parens-no-spaces"
+  Enabled: true
+
+Lint/RaiseException:
+  Enabled: true
+
+Lint/RequireParentheses:
+  Description: >-
+    Use parentheses in the method call to avoid confusion
+    about precedence.
+  Enabled: false
+
+Lint/StructNewOverride:
+  Enabled: true
+
+Lint/SuppressedException:
+  Description: "Don't suppress exception."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#dont-hide-exceptions"
+  Enabled: false
+
+Lint/UnderscorePrefixedVariableName:
+  Description: "Do not use prefix `_` for a variable that is used."
+  Enabled: true
+
+Lint/Void:
+  Description: "Possible use of operator/literal/variable in void context."
+  Enabled: false
+
+#################### Metrics ###############################
+
+Metrics/AbcSize:
+  Description: >-
+    A calculated magnitude based on number of assignments,
+    branches, and conditions.
+  Enabled: false
+
+Metrics/BlockLength:
+  ExcludedMethods: ["describe", "context", "shared_examples"]
+  Exclude:
+    - config/environments/**
+
+Metrics/BlockNesting:
+  Description: "Avoid excessive block nesting"
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#three-is-the-number-thou-shalt-count"
+  Enabled: true
+  Exclude:
+    - spec/spec_helper.rb
+
+Metrics/ClassLength:
+  Description: "Avoid classes longer than 100 lines of code."
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Description: >-
+    A complexity metric that is strongly correlated to the number
+    of test cases needed to validate a method.
+  Enabled: true
+
+Metrics/MethodLength:
+  Description: "Avoid methods longer than 10 lines of code."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#short-methods"
+  Enabled: true
+
+Metrics/ModuleLength:
+  Description: "Avoid modules longer than 100 lines of code."
+  Enabled: false
+
+Metrics/ParameterLists:
+  Description: "Avoid parameter lists longer than three or four parameters."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#too-many-params"
+  Enabled: true
+
+#################### Naming ###############################
+
+Naming/AccessorMethodName:
+  Description: Check the naming of accessor methods for get_/set_.
+  Enabled: false
+
+Naming/AsciiIdentifiers:
+  Description: "Use only ascii symbols in identifiers."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#english-identifiers"
+  Enabled: false
+
+Naming/BinaryOperatorParameterName:
+  Description: "When defining binary operators, name the argument other."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#other-arg"
+  Enabled: true
+
+Naming/FileName:
+  Description: "Use snake_case for source file names."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#snake-case-files"
+  Enabled: true
+
+Naming/PredicateName:
+  Description: "Check the names of predicate methods."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#bool-methods-qmark"
+  ForbiddenPrefixes:
+    - is_
+  Exclude:
+    - spec/**/*
+
+#################### Performance ###########################
+
+Performance/CaseWhenSplat:
+  Description: >-
+    Place `when` conditions that use splat at the end
+    of the list of `when` branches.
+  Enabled: true
+
+Performance/Count:
+  Description: >-
+    Use `count` instead of `select...size`, `reject...size`,
+    `select...count`, `reject...count`, `select...length`,
+    and `reject...length`.
+  Enabled: true
+
+Performance/Detect:
+  Description: >-
+    Use `detect` instead of `select.first`, `find_all.first`,
+    `select.last`, and `find_all.last`.
+  Reference: "https://github.com/JuanitoFatas/fast-ruby#enumerabledetect-vs-enumerableselectfirst-code"
+  Enabled: true
+
+Performance/FlatMap:
+  Description: >-
+    Use `Enumerable#flat_map`
+    instead of `Enumerable#map...Array#flatten(1)`
+    or `Enumberable#collect..Array#flatten(1)`
+  Reference: "https://github.com/JuanitoFatas/fast-ruby#enumerablemaparrayflatten-vs-enumerableflat_map-code"
+  Enabled: true
+
+Performance/RedundantMerge:
+  Description: >-
+    This cop identifies places where `Hash#merge!` can be replaced
+    by `Hash#[]=`.
+  Enabled: true
+
+Performance/ReverseEach:
+  Description: "Use `reverse_each` instead of `reverse.each`."
+  Reference: "https://github.com/JuanitoFatas/fast-ruby#enumerablereverseeach-vs-enumerablereverse_each-code"
+  Enabled: true
+
+Performance/Size:
+  Description: >-
+    Use `size` instead of `count` for counting
+    the number of elements in `Array` and `Hash`.
+  Reference: "https://github.com/JuanitoFatas/fast-ruby#arraycount-vs-arraysize-code"
+  Enabled: true
+
+Performance/StringReplacement:
+  Description: >-
+    Use `tr` instead of `gsub` when you are replacing the same
+    number of characters. Use `delete` instead of `gsub` when
+    you are deleting characters.
+  Reference: "https://github.com/JuanitoFatas/fast-ruby#stringgsub-vs-stringtr-code"
+  Enabled: true
+
+#################### Style ###########################
+
+Style/ArrayJoin:
+  Description: "Use Array#join instead of Array#*."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#array-join"
+  Enabled: true
+
+Style/AsciiComments:
+  Description: "Use only ascii symbols in comments."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#english-comments"
+  Enabled: false
+
+Style/Attr:
+  Description: "Checks for uses of Module#attr."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#attr"
+  Enabled: false
+
+Style/CaseEquality:
+  Description: "Avoid explicit use of the case equality operator(===)."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#no-case-equality"
+  Enabled: false
+
+Style/CharacterLiteral:
+  Description: "Checks for uses of character literals."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#no-character-literals"
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Description: "Checks style of children classes and modules."
+  Enabled: true
+  EnforcedStyle: nested
+
+Style/ClassVars:
+  Description: "Avoid the use of class variables."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#no-class-vars"
+  Enabled: true
+
+Style/CollectionMethods:
+  Enabled: true
+  PreferredMethods:
+    find: detect
+    inject: reduce
+    collect: map
+    find_all: select
+
+Style/ColonMethodCall:
+  Description: "Do not use :: for method call."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#double-colons"
+  Enabled: true
+
+Style/CommentAnnotation:
+  Description: >-
+    Checks formatting of special comments
+    (TODO, FIXME, OPTIMIZE, HACK, REVIEW).
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#annotate-keywords"
+  Enabled: true
+
+Style/PreferredHashMethods:
+  Description: "Checks use of `has_key?` and `has_value?` Hash methods."
+  StyleGuide: "#hash-key"
+  Enabled: true
+
+Style/Documentation:
+  Description: "Document classes and non-namespace modules."
+  Enabled: false
+
+Style/DoubleNegation:
+  Description: "Checks for uses of double negation (!!)."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#no-bang-bang"
+  Enabled: false
+
+Style/EachWithObject:
+  Description: "Prefer `each_with_object` over `inject` or `reduce`."
+  Enabled: true
+
+Style/EmptyLiteral:
+  Description: "Prefer literals to Array.new/Hash.new/String.new."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#literal-array-hash"
+  Enabled: true
+
+# Checks whether the source file has a utf-8 encoding comment or not
+# AutoCorrectEncodingComment must match the regex
+# /#.*coding\s?[:=]\s?(?:UTF|utf)-8/
+Style/Encoding:
+  Enabled: false
+
+Style/EvenOdd:
+  Description: "Favor the use of Fixnum#even? && Fixnum#odd?"
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#predicate-methods"
+  Enabled: true
+
+Style/ExponentialNotation:
+  Enabled: true
+
+Style/FrozenStringLiteralComment:
+  Description: >-
+    Add the frozen_string_literal comment to the top of files
+    to help transition from Ruby 2.3.0 to Ruby 3.0.
+  Enabled: true
+
+Style/FormatString:
+  Description: "Enforce the use of Kernel#sprintf, Kernel#format or String#%."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#sprintf"
+  Enabled: false
+
+Style/GlobalVars:
+  Description: "Do not introduce global variables."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#instance-vars"
+  Reference: "http://www.zenspider.com/Languages/Ruby/QuickRef.html"
+  Enabled: true
+
+Style/GuardClause:
+  Description: "Check for conditionals that can be replaced with guard clauses"
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#no-nested-conditionals"
+  Enabled: true
+
+Style/HashEachMethods:
+  Description: "Use Hash#each_key and Hash#each_value."
+  StyleGuide: "https://github.com/rubocop-hq/ruby-style-guide#hash-each"
+  Enabled: true
+
+Style/HashTransformKeys:
+  Description: "Prefer `transform_keys` over `each_with_object` and `map`."
+  StyleGuide: "https://github.com/rubocop-hq/ruby-style-guide#hashtransform_keys-and-hashtransform_values"
+  Enabled: true
+
+Style/HashTransformValues:
+  Description: "Prefer `transform_values` over `each_with_object` and `map`."
+  StyleGuide: "https://github.com/rubocop-hq/ruby-style-guide#hashtransform_keys-and-hashtransform_values"
+  Enabled: true
+
+Style/IfUnlessModifier:
+  Description: >-
+    Favor modifier if/unless usage when you have a
+    single-line body.
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#if-as-a-modifier"
+  Enabled: true
+
+Style/IfWithSemicolon:
+  Description: "Do not use if x; .... Use the ternary operator instead."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#no-semicolon-ifs"
+  Enabled: true
+
+Style/InlineComment:
+  Description: "Avoid inline comments."
+  Enabled: false
+
+Style/Lambda:
+  Description: "Use the new lambda literal syntax for single-line blocks."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#lambda-multi-line"
+  Enabled: true
+
+Style/LambdaCall:
+  Description: "Use lambda.call(...) instead of lambda.(...)."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#proc-call"
+  Enabled: false
+
+Style/LineEndConcatenation:
+  Description: >-
+    Use \ instead of + or << to concatenate two string literals at
+    line end.
+  Enabled: true
+
+Style/ModuleFunction:
+  Description: "Checks for usage of `extend self` in modules."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#module-function"
+  Enabled: true
+
+Style/MultilineBlockChain:
+  Description: "Avoid multi-line chains of blocks."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#single-line-blocks"
+  Enabled: false
+
+Style/NegatedIf:
+  Description: >-
+    Favor unless over if for negative conditions
+    (or control flow or).
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#unless-for-negatives"
+  Enabled: true
+
+Style/NegatedWhile:
+  Description: "Favor until over while for negative conditions."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#until-for-negatives"
+  Enabled: true
+
+Style/Next:
+  Description: "Use `next` to skip iteration instead of a condition at the end."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#no-nested-conditionals"
+  Enabled: true
+
+Style/NilComparison:
+  Description: "Prefer x.nil? to x == nil."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#predicate-methods"
+  Enabled: true
+
+Style/Not:
+  Description: "Use ! instead of not."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#bang-not-not"
+  Enabled: true
+
+Style/NumericLiterals:
+  Description: >-
+    Add underscores to large numeric literals to improve their
+    readability.
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#underscores-in-numerics"
+  Enabled: true
+
+Style/OneLineConditional:
+  Description: >-
+    Favor the ternary operator(?:) over
+    if/then/else/end constructs.
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#ternary-operator"
+  Enabled: true
+
+Style/PercentLiteralDelimiters:
+  Description: "Use `%`-literal delimiters consistently"
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#percent-literal-braces"
+  PreferredDelimiters:
+    default: ()
+
+Style/PerlBackrefs:
+  Description: "Avoid Perl-style regex back references."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#no-perl-regexp-last-matchers"
+  Enabled: false
+
+Style/Proc:
+  Description: "Use proc instead of Proc.new."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#proc"
+  Enabled: false
+
+Style/RaiseArgs:
+  Description: "Checks the arguments passed to raise/fail."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#exception-class-messages"
+  Enabled: true
+
+Style/RedundantRegexpCharacterClass:
+  Description: "This cop checks for unnecessary single-element Regexp character classes."
+  StyleGuide: "https://docs.rubocop.org/rubocop/cops_style.html#styleredundantregexpcharacterclass"
+  Enabled: true
+
+Style/RedundantRegexpEscape:
+  Description: "This cop checks for redundant escapes inside Regexp literals."
+  StyleGuide: "https://docs.rubocop.org/rubocop/cops_style.html#styleredundantregexpescape"
+  Enabled: true
+
+Style/RegexpLiteral:
+  Description: "Use / or %r around regular expressions."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#percent-r"
+  Enabled: true
+
+Style/SelfAssignment:
+  Description: >-
+    Checks for places where self-assignment shorthand should have
+    been used.
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#self-assignment"
+  Enabled: true
+
+Style/SingleLineBlockParams:
+  Description: "Enforces the names of some block params."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#reduce-blocks"
+  Enabled: false
+
+Style/SingleLineMethods:
+  Description: "Avoid single-line methods."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#no-single-line-methods"
+  Enabled: false
+
+Style/SignalException:
+  Description: "Checks for proper usage of fail and raise."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#fail-method"
+  Enabled: true
+
+Style/SlicingWithRange:
+  Enabled: true
+
+Style/SpecialGlobalVars:
+  Description: "Avoid Perl-style global variables."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#no-cryptic-perlisms"
+  Enabled: false
+
+Style/StringLiterals:
+  Description: "Checks if uses of quotes match the configured preference."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#consistent-string-literals"
+  EnforcedStyle: single_quotes
+  Enabled: true
+
+Style/TrivialAccessors:
+  Description: "Prefer attr_* methods to trivial readers/writers."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#attr_family"
+  Enabled: true
+
+Style/VariableInterpolation:
+  Description: >-
+    Don't interpolate global, instance and class variables
+    directly in strings.
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#curlies-interpolate"
+  Enabled: true
+
+Style/WhenThen:
+  Description: "Use when x then ... for one-line cases."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#one-line-cases"
+  Enabled: true
+
+Style/WhileUntilModifier:
+  Description: >-
+    Favor modifier while/until usage when you have a
+    single-line body.
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#while-as-a-modifier"
+  Enabled: true
+
+Style/WordArray:
+  Description: "Use %w or %W for arrays of words."
+  StyleGuide: "https://github.com/bbatsov/ruby-style-guide#percent-w"
+  Enabled: false
+
+Style/Sample:
+  Description: >-
+    Use `sample` instead of `shuffle.first`,
+    `shuffle.last`, and `shuffle[Fixnum]`.
+  Reference: "https://github.com/JuanitoFatas/fast-ruby#arrayshufflefirst-vs-arraysample-code"
+  Enabled: true
+
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: "comma"
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: "comma"
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: "comma"
+
+#################### Testing ###########################
+
+RSpec/AnyInstance:
+  Description: Check that instances are not being stubbed globally.
+  Enabled: true
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/AnyInstance
+
+RSpec/AroundBlock:
+  Description: Checks that around blocks actually run the test.
+  Enabled: true
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/AroundBlock
+
+RSpec/AlignLeftLetBrace:
+  Description: Checks that left braces for adjacent single line lets are aligned.
+  Enabled: false
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/AlignLeftLetBrace
+
+RSpec/AlignRightLetBrace:
+  Description: Checks that right braces for adjacent single line lets are aligned.
+  Enabled: false
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/AlignRightLetBrace
+
+RSpec/Be:
+  Description: Check for expectations where `be` is used without argument.
+  Enabled: true
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/Be
+
+RSpec/BeEql:
+  Description: Check for expectations where `be(...)` can replace `eql(...)`.
+  Enabled: true
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/BeEql
+
+RSpec/BeforeAfterAll:
+  Description: Check that before/after(:all) isn't being used.
+  Enabled: true
+  Exclude:
+    - spec/spec_helper.rb
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/BeforeAfterAll
+
+RSpec/ContextWording:
+  Description: "`context` block descriptions should start with 'when', or 'with'."
+  Enabled: false
+  Prefixes:
+    - when
+    - with
+    - without
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/ContextWording
+
+RSpec/DescribeClass:
+  Description: Check that the first argument to the top level describe is a constant.
+  Enabled: true
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/DescribeClass
+  Exclude:
+    - spec/system/**
+
+RSpec/DescribedClass:
+  Description: Checks that tests use `described_class`.
+  SkipBlocks: false
+  Enabled: true
+  EnforcedStyle: described_class
+  SupportedStyles:
+    - described_class
+    - explicit
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/DescribedClass
+
+RSpec/DescribeMethod:
+  Description: Checks that the second argument to `describe` specifies a method.
+  Enabled: true
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/DescribeMethod
+
+RSpec/DescribeSymbol:
+  Description: Avoid describing symbols.
+  Enabled: true
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/DescribeSymbol
+
+RSpec/IteratedExpectation:
+  Description: Check that `all` matcher is used instead of iterating over an array.
+  Enabled: true
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/IteratedExpectation
+
+RSpec/EmptyExampleGroup:
+  Description: Checks if an example group does not include any tests.
+  Enabled: true
+  CustomIncludeMethods: []
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/EmptyExampleGroup
+
+RSpec/EmptyLineAfterExampleGroup:
+  Description: Checks if there is an empty line after example group blocks.
+  Enabled: true
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/EmptyLineAfterExampleGroup
+
+RSpec/EmptyLineAfterFinalLet:
+  Description: Checks if there is an empty line after the last let block.
+  Enabled: true
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/EmptyLineAfterFinalLet
+
+RSpec/EmptyLineAfterHook:
+  Description: Checks if there is an empty line after hook blocks.
+  Enabled: true
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/EmptyLineAfterHook
+
+RSpec/EmptyLineAfterSubject:
+  Description: Checks if there is an empty line after subject block.
+  Enabled: true
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/EmptyLineAfterSubject
+
+RSpec/ExampleLength:
+  Description: Checks for long examples.
+  Enabled: true
+  Max: 15
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/ExampleLength
+
+RSpec/ExampleWithoutDescription:
+  Description: Checks for examples without a description.
+  Enabled: true
+  EnforcedStyle: always_allow
+  SupportedStyles:
+    - always_allow
+    - single_line_only
+    - disallow
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/ExampleWithoutDescription
+
+RSpec/ExampleWording:
+  Description: Checks for common mistakes in example descriptions.
+  Enabled: true
+  CustomTransform:
+    be: is
+    BE: IS
+    have: has
+    HAVE: HAS
+  IgnoredWords: []
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/ExampleWording
+
+RSpec/ExpectActual:
+  Description: Checks for `expect(...)` calls containing literal values.
+  Enabled: true
+  Exclude:
+    - spec/routing/**/*
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/ExpectActual
+
+RSpec/ExpectChange:
+  Description: Checks for consistent style of change matcher.
+  Enabled: true
+  EnforcedStyle: method_call
+  SupportedStyles:
+    - method_call
+    - block
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/ExpectChange
+
+RSpec/ExpectInHook:
+  Enabled: true
+  Description: Do not use `expect` in hooks such as `before`.
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/ExpectInHook
+
+RSpec/ExpectOutput:
+  Description: Checks for opportunities to use `expect { ... }.to output`.
+  Enabled: true
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/ExpectOutput
+
+RSpec/FilePath:
+  Description: Checks that spec file paths are consistent with the test subject.
+  Enabled: true
+  CustomTransform:
+    RuboCop: rubocop
+    RSpec: rspec
+  IgnoreMethods: false
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/FilePath
+
+RSpec/Focus:
+  Description: Checks if examples are focused.
+  Enabled: true
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/Focus
+
+RSpec/HookArgument:
+  Description: Checks the arguments passed to `before`, `around`, and `after`.
+  Enabled: true
+  EnforcedStyle: implicit
+  SupportedStyles:
+    - implicit
+    - each
+    - example
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/HookArgument
+
+RSpec/HooksBeforeExamples:
+  Enabled: true
+  Description: Checks for before/around/after hooks that come after an example.
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/HooksBeforeExamples
+
+RSpec/ImplicitExpect:
+  Description: Check that a consistent implicit expectation style is used.
+  Enabled: true
+  EnforcedStyle: is_expected
+  SupportedStyles:
+    - is_expected
+    - should
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/ImplicitExpect
+
+RSpec/ImplicitSubject:
+  Enabled: true
+  Description: Checks for usage of implicit subject (`is_expected` / `should`).
+  EnforcedStyle: single_line_only
+  SupportedStyles:
+    - single_line_only
+    - disallow
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/ImplicitSubject
+
+RSpec/InstanceSpy:
+  Description: Checks for `instance_double` used with `have_received`.
+  Enabled: true
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/InstanceSpy
+
+RSpec/InstanceVariable:
+  Description: Checks for instance variable usage in specs.
+  AssignmentOnly: false
+  Enabled: false
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/InstanceVariable
+
+RSpec/InvalidPredicateMatcher:
+  Description: Checks invalid usage for predicate matcher.
+  Enabled: true
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/InvalidPredicateMatcher
+
+RSpec/ItBehavesLike:
+  Description: Checks that only one `it_behaves_like` style is used.
+  Enabled: true
+  EnforcedStyle: it_behaves_like
+  SupportedStyles:
+    - it_behaves_like
+    - it_should_behave_like
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/ItBehavesLike
+
+RSpec/LeadingSubject:
+  Description: Enforce that subject is the first definition in the test.
+  Enabled: true
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/LeadingSubject
+
+RSpec/LetBeforeExamples:
+  Description: Checks for `let` definitions that come after an example.
+  Enabled: true
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/LetBeforeExamples
+
+RSpec/LetSetup:
+  Description: Checks unreferenced `let!` calls being used for test setup.
+  Enabled: true
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/LetSetup
+
+RSpec/MessageChain:
+  Description: Check that chains of messages are not being stubbed.
+  Enabled: true
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/MessageChain
+
+RSpec/MessageExpectation:
+  Description: Checks for consistent message expectation style.
+  Enabled: false
+  EnforcedStyle: allow
+  SupportedStyles:
+    - allow
+    - expect
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/MessageExpectation
+
+RSpec/MessageSpies:
+  Description: Checks that message expectations are set using spies.
+  Enabled: true
+  EnforcedStyle: have_received
+  SupportedStyles:
+    - have_received
+    - receive
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/MessageSpies
+
+RSpec/MissingExampleGroupArgument:
+  Description: Checks that the first argument to an example group is not empty.
+  Enabled: true
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/MissingExampleGroupArgument
+
+RSpec/MultipleDescribes:
+  Description: Checks for multiple top level describes.
+  Enabled: true
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/MultipleDescribes
+
+RSpec/MultipleExpectations:
+  Description: Checks if examples contain too many `expect` calls.
+  Enabled: true
+  Max: 5
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/MultipleExpectations
+
+RSpec/MultipleSubjects:
+  Description: Checks if an example group defines `subject` multiple times.
+  Enabled: true
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/MultipleSubjects
+
+RSpec/NamedSubject:
+  Description: Checks for explicitly referenced test subjects.
+  Enabled: true
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/NamedSubject
+
+RSpec/NestedGroups:
+  Description: Checks for nested example groups.
+  Enabled: true
+  Max: 3
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/NestedGroups
+
+RSpec/NotToNot:
+  Description: Checks for consistent method usage for negating expectations.
+  EnforcedStyle: not_to
+  SupportedStyles:
+    - not_to
+    - to_not
+  Enabled: true
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/NotToNot
+
+RSpec/OverwritingSetup:
+  Enabled: true
+  Description: Checks if there is a let/subject that overwrites an existing one.
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/OverwritingSetup
+
+RSpec/Pending:
+  Enabled: false
+  Description: Checks for any pending or skipped examples.
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/Pending
+
+RSpec/ReceiveCounts:
+  Enabled: true
+  Description: Check for `once` and `twice` receive counts matchers usage.
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/ReceiveCounts
+
+RSpec/ReceiveNever:
+  Enabled: true
+  Description: Prefer `not_to receive(...)` over `receive(...).never`.
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/ReceiveNever
+
+RSpec/RepeatedDescription:
+  Enabled: true
+  Description: Check for repeated description strings in example groups.
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/RepeatedDescription
+
+RSpec/RepeatedExample:
+  Enabled: true
+  Description: Check for repeated examples within example groups.
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/RepeatedExample
+
+RSpec/ReturnFromStub:
+  Enabled: true
+  Description: Checks for consistent style of stub's return setting.
+  EnforcedStyle: and_return
+  SupportedStyles:
+    - and_return
+    - block
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/ReturnFromStub
+
+RSpec/SharedContext:
+  Description: Checks for proper shared_context and shared_examples usage.
+  Enabled: true
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/SharedContext
+
+RSpec/SharedExamples:
+  Description: Enforces use of string to titleize shared examples.
+  Enabled: true
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/SharedExamples
+
+RSpec/SingleArgumentMessageChain:
+  Description: Checks that chains of messages contain more than one element.
+  Enabled: true
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/SingleArgumentMessageChain
+
+RSpec/ScatteredLet:
+  Description: Checks for let scattered across the example group.
+  Enabled: true
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/ScatteredLet
+
+RSpec/ScatteredSetup:
+  Description: Checks for setup scattered across multiple hooks in an example group.
+  Enabled: true
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/ScatteredSetup
+
+RSpec/SubjectStub:
+  Description: Checks for stubbed test subjects.
+  Enabled: true
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/SubjectStub
+
+RSpec/PredicateMatcher:
+  Description: Prefer using predicate matcher over using predicate method directly.
+  Enabled: true
+  Strict: true
+  EnforcedStyle: inflected
+  SupportedStyles:
+    - inflected
+    - explicit
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/PredicateMatcher
+
+RSpec/VerifiedDoubles:
+  Description: Prefer using verifying doubles over normal doubles.
+  Enabled: true
+  IgnoreSymbolicNames: false
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/VerifiedDoubles
+
+RSpec/VoidExpect:
+  Description: This cop checks void `expect()`.
+  Enabled: true
+  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/VoidExpect
