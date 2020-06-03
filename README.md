@@ -1,7 +1,9 @@
 # cloudimage-rb
 
-`cloudimage-rb` is the official ruby API wrapper for
+`cloudimage-rb` is the official Ruby API wrapper for
 [Cloudimage's API](https://docs.cloudimage.io/go/cloudimage-documentation-v7/en/introduction).
+
+Supports Ruby `2.4` and above, `JRuby`, and `TruffleRuby`.
 
 ## Installation
 
