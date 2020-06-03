@@ -1,6 +1,8 @@
-# cloudimage-rb
+# cloudimage
 
-`cloudimage-rb` is the official Ruby API wrapper for
+![](https://github.com/scaleflex/cloudimage-rb/workflows/Build/badge.svg)
+
+`cloudimage` is the official Ruby API wrapper for
 [Cloudimage's API](https://docs.cloudimage.io/go/cloudimage-documentation-v7/en/introduction).
 
 Supports Ruby `2.4` and above, `JRuby`, and `TruffleRuby`.
@@ -10,7 +12,7 @@ Supports Ruby `2.4` and above, `JRuby`, and `TruffleRuby`.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'cloudimage-rb'
+gem 'cloudimage'
 ```
 
 And then execute:
@@ -19,7 +21,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install cloudimage-rb
+    $ gem install cloudimage
 
 ## Usage
 
