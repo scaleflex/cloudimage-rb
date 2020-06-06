@@ -22,4 +22,5 @@ Gem::Specification.new do |s|
 
   s.license = 'MIT'
   s.required_ruby_version = Gem::Requirement.new('>= 2.4.0')
+  s.add_dependency 'addressable', '~> 2.7'
 end
