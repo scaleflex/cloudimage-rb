@@ -7,9 +7,6 @@ gemspec
 gem 'pry'
 gem 'rake'
 gem 'rspec'
-
-install_if -> { RUBY_VERSION !~ /^2\.3/ } do
-  gem 'rubocop'
-  gem 'rubocop-performance'
-  gem 'rubocop-rspec'
-end
+gem 'rubocop'
+gem 'rubocop-performance'
+gem 'rubocop-rspec'
