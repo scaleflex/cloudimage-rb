@@ -40,11 +40,11 @@ jobs:
           gem install bundler --no-document
           bundle config set without 'tools benchmarks docs'
       - name: Bundle install
-        if: ${{ matrix.ruby != '2.3' && matrix.ruby != 'rubinius' }}
         run: |
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
       - name: Run Rubocop
+        if: ${{ matrix.ruby != '2.3' && matrix.ruby != 'rubinius' }}
         run: bundle exec rubocop --parallel
       - name: Run all tests
         run: bundle exec rake
