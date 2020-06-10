@@ -15,6 +15,7 @@ Supports Ruby `2.4` and above, `JRuby`, and `TruffleRuby`.
     - [Aliases](#aliases)
     - [Custom helpers](#custom-helpers)
   - [Development](#development)
+    - [TODOs](#todos)
   - [Contributing](#contributing)
   - [License](#license)
   - [Code of Conduct](#code-of-conduct)
@@ -114,6 +115,17 @@ After checking out the repo, run `bin/setup` to install dependencies.
 Then, run `bundle exec rake` to run the tests. You can also run
 `bin/console` for an interactive prompt that will allow you to
 experiment.
+
+### TODOs
+
+- Implement the remaining supported Cloudimage params
+- URL signature
+- Add support for aliases
+- Add support for custom CNAMEs
+- Add support for presets
+- Add support for static content
+- `srcset` generation
+- Purge cache API
 
 ## Contributing
 
