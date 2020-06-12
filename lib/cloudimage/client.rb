@@ -6,30 +6,44 @@ module Cloudimage
   class InvalidConfig < StandardError; end
 
   class Client
-    attr_reader :token
+    attr_reader :config
 
     API_VERSION = 'v7'
+    DEFAULT_SIGNATURE_LENGTH = 18
 
-    def initialize(token: nil)
-      @token = token
+    def initialize(**options)
+      @config = {}
+      @config[:token] = options[:token]
+      @config[:salt] = options[:salt]
+      @config[:signature_length] =
+        options[:signature_length] || DEFAULT_SIGNATURE_LENGTH
+      @config[:api_version] = API_VERSION
 
       ensure_valid_config
     end
 
     def path(path)
-      URI.new(base_url_for(token), path)
+      URI.new(path, **config)
     end
 
     private
 
-    def base_url_for(token)
-      "https://#{token}.cloudimg.io/#{API_VERSION}"
+    def ensure_valid_config
+      ensure_valid_token
+      ensure_valid_signature_length
     end
 
-    def ensure_valid_config
-      return unless token.to_s.strip.empty?
+    def ensure_valid_token
+      return unless config[:token].nil?
 
       raise InvalidConfig, 'Please specify your Cloudimage customer token.'
+    end
+
+    def ensure_valid_signature_length
+      return if config[:salt].nil?
+      return if (6..40).cover? config[:signature_length]
+
+      raise InvalidConfig, 'Signature length must be must be 6-40 characters.'
     end
   end
 end

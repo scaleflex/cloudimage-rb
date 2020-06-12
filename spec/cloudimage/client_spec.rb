@@ -6,5 +6,18 @@ describe Cloudimage::Client do
       expect { described_class.new }
         .to raise_error Cloudimage::InvalidConfig, /Cloudimage customer token/
     end
+
+    context 'URL signatures' do
+      it 'has a default signature length' do
+        client = described_class.new(token: 'mytoken')
+        expect((6..40)).to cover client.config[:signature_length]
+      end
+
+      it 'raises an error when given an invalid signature length' do
+        expect do
+          described_class.new(token: 'token', salt: 'slt', signature_length: 5)
+        end.to raise_error Cloudimage::InvalidConfig, /Signature length must be/
+      end
+    end
   end
 end

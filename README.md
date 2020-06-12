@@ -14,6 +14,7 @@ Supports Ruby `2.4` and above, `JRuby`, and `TruffleRuby`.
     - [Chainable helpers](#chainable-helpers)
     - [Aliases](#aliases)
     - [Custom helpers](#custom-helpers)
+    - [Security](#security)
   - [Development](#development)
     - [TODOs](#todos)
   - [Contributing](#contributing)
@@ -49,6 +50,15 @@ object:
 ```ruby
 client = Cloudimage::Client.new(token: 'mysecrettoken')
 ```
+
+Cloudimage client accepts the following options:
+
+| Option             | Required? | Additional info                                     |
+| ------------------ | --------- | --------------------------------------------------- |
+| `token`            | Yes       |                                                     |
+| `salt`             | No        | See [Security](#security).                          |
+| `signature_length` | No        | Integer value in the range `6..40`. Defaults to 18. |
+| `api_version`      | No        | Defaults to the current stable version.             |
 
 Calling `path` on the client object returns an instance of `Cloudimage::URI`.
 It accepts path to the image as a string and we we will use it to build
@@ -109,6 +119,20 @@ need to accept arguments and will be translated into `param=1` in the final URL.
 For a list of custom helpers available to you, please consult
 [`Cloudimage::CustomHelpers`](lib/cloudimage/custom_helpers.rb) module.
 
+### Security
+
+If `salt` is defined, all URLs will be signed.
+
+You can control the length of the generated signature by specifying `signature_length`
+when initializing the client.
+
+```ruby
+client = Cloudimage::Client.new(token: 'mysecrettoken', salt: 'mysecretsalt', signature_length: 10)
+uri = client.path('/assets/image.png')
+uri.w(200).h(400).to_url
+# => "https://mysecrettoken.cloudimg.io/v7/assets/image.png?h=400&w=200&ci_sign=79cfbc458b"
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies.
@@ -119,7 +143,7 @@ experiment.
 ### TODOs
 
 - Implement the remaining supported Cloudimage params
-- URL signature
+- URL sealing
 - Add support for aliases
 - Add support for custom CNAMEs
 - Add support for presets

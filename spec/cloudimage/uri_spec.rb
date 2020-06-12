@@ -2,9 +2,9 @@
 
 describe Cloudimage::URI do
   before do
-    token = 'token'
-    @client = Cloudimage::Client.new(token: token)
-    @base = "https://#{token}.cloudimg.io/v7"
+    @token = 'token'
+    @client = Cloudimage::Client.new(token: @token)
+    @base = "https://#{@token}.cloudimg.io/v7"
   end
 
   it 'does not catch missing methods' do
@@ -78,6 +78,42 @@ describe Cloudimage::URI do
         .to eq expected
       expect(@client.path('/assets/image.jpg').func('face').to_url)
         .to eq expected
+    end
+  end
+
+  describe 'signature' do
+    context 'no params' do
+      it 'returns signed image URL' do
+        client = Cloudimage::Client.new(token: 'token', salt: 'salt')
+        expected = @base + '/assets/image.jpg?ci_sign=8e71efd440164f3cc8'
+        expect(client.path('/assets/image.jpg').to_url).to eq expected
+      end
+    end
+
+    context 'salt given' do
+      it 'returns signed image URL' do
+        client = Cloudimage::Client.new(token: @token, salt: 'salt')
+        expected = @base + '/assets/image.jpg?w=200&ci_sign=84c81ef20852013046'
+        expect(client.path('/assets/image.jpg').w(200).to_url).to eq expected
+      end
+
+      it 'returns trimmed signature if specified' do
+        client = Cloudimage::Client.new(
+          token: @token,
+          salt: 'salt',
+          signature_length: 8,
+        )
+        expected = @base + '/assets/image.jpg?w=200&ci_sign=84c81ef2'
+        expect(client.path('/assets/image.jpg').w(200).to_url).to eq expected
+      end
+
+      it 'handles a mix of helpers and to_url params' do
+        client = Cloudimage::Client.new(token: @token, salt: 'salt')
+        expected = @base +
+          '/assets/image.jpg?ci_info=1&h=100&w=200&ci_sign=40bd5a1d99455fe5cf'
+        expect(client.path('/assets/image.jpg').debug.to_url(w: 200, h: 100))
+          .to eq expected
+      end
     end
   end
 

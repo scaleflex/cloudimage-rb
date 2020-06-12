@@ -534,6 +534,11 @@ Style/RaiseArgs:
   StyleGuide: "https://github.com/bbatsov/ruby-style-guide#exception-class-messages"
   Enabled: true
 
+Style/RedundantFetchBlock:
+  Description: "This cop identifies places where fetch(key) { value } can be replaced by fetch(key, value)."
+  StyleGuide: "https://docs.rubocop.org/rubocop/0.86/cops_style.html#styleredundantfetchblock"
+  Enabled: true
+
 Style/RedundantRegexpCharacterClass:
   Description: "This cop checks for unnecessary single-element Regexp character classes."
   StyleGuide: "https://docs.rubocop.org/rubocop/cops_style.html#styleredundantregexpcharacterclass"
