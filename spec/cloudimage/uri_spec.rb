@@ -49,6 +49,14 @@ describe Cloudimage::URI do
       uri = @client.path('/assets/image.jpg').w(200).h(100).gravity('south')
       expect(uri.to_url).to eq expected
     end
+
+    it 'handles filter concatenation with param encoding' do
+      expected = @base +
+        '/assets/image.jpg?f=bright%3A15%2Ccontrast%3A30%2Cgrey'
+      uri = @client.path('/assets/image.jpg')
+        .f('bright:15', 'contrast:30', 'grey')
+      expect(uri.to_url).to eq expected
+    end
   end
 
   context 'flag params' do
