@@ -142,12 +142,8 @@ experiment.
 
 ### TODOs
 
-- Implement the remaining supported Cloudimage params
 - URL sealing
-- Add support for aliases
 - Add support for custom CNAMEs
-- Add support for presets
-- Add support for static content
 - `srcset` generation
 - Purge cache API
 

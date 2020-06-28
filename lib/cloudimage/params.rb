@@ -18,18 +18,45 @@ module Cloudimage
       bg_colourise
       bg_img_fit
       bg_opacity
+      blur
+      blur_faces
       br_px
+      bright
       ci_info
+      contrast
+      doc_page
+      f
+      force_format
       func
       gravity
+      gray
+      grey
       h
       height
+      optipress
       org_if_sml
+      p
+      pixelate
+      pixellate
+      process
+      q
       r
+      radius
       sharp
       tl_px
       trim
       w
+      wat
+      wat_color
+      wat_colour
+      wat_url
+      wat_font
+      wat_fontsize
+      wat_gravity
+      wat_opacity
+      wat_pad
+      wat_scale
+      wat_text
       width
     ].freeze
   end
