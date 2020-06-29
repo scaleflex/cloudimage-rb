@@ -2,6 +2,19 @@
 
 require 'bundler/setup'
 require 'pry'
+
+# JRuby seems to report incorrect, lower stats.
+unless RUBY_ENGINE == 'jruby'
+  require 'simplecov'
+
+  SimpleCov.start do
+    minimum_coverage 95
+    maximum_coverage_drop 1
+    add_filter '/spec/'
+  end
+end
+
+# This needs to come after requiring SimpleCov.
 require 'cloudimage'
 
 RSpec.configure do |config|
