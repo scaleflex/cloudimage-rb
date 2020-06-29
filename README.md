@@ -20,6 +20,7 @@ Supports Ruby `2.4` and above, `JRuby`, and `TruffleRuby`.
   - [Contributing](#contributing)
   - [License](#license)
   - [Code of Conduct](#code-of-conduct)
+  - [Showcase](#showcase)
 
 ## Installation
 
@@ -164,3 +165,12 @@ The gem is available as open source under the terms of the
 Everyone interacting with the project's codebase, issues, and pull
 requests is expected to follow the
 [code of conduct](https://github.com/scaleflex/cloudimage-rb/blob/master/CODE_OF_CONDUCT.md).
+
+## Showcase
+
+Among others, `cloudimage` is used to power the following apps:
+
+- [Robin PRO](https://apps.shopify.com/robin-pro-image-gallery) - Fast, beautiful, mobile-friendly image galleries for Shopify stores.
+
+Using this gem in your app? Let us know in [this issue](https://github.com/scaleflex/cloudimage-rb/issues/8)
+so that we can feature it.
