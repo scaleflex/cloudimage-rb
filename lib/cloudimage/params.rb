@@ -26,6 +26,7 @@ module Cloudimage
       contrast
       doc_page
       f
+      force_download
       force_format
       func
       gravity
