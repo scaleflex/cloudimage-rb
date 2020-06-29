@@ -1,5 +1,9 @@
 ## master
 
+## 0.2.1 (2020-06-29)
+
+- Include `force_download` param.
+
 ## 0.2.0 (2020-06-28)
 
 - URL signatures.
