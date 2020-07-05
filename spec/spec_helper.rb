@@ -10,7 +10,7 @@ unless RUBY_ENGINE == 'jruby'
   SimpleCov.start do
     minimum_coverage 95
     maximum_coverage_drop 1
-    add_filter '/spec/'
+    add_filter(/spec|refinements/)
   end
 end
 

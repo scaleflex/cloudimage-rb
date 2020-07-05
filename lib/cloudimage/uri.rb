@@ -1,31 +1,31 @@
 # frozen_string_literal: true
 
-require 'digest'
-
 require_relative 'params'
 require_relative 'custom_helpers'
+require_relative 'security'
+require_relative 'refinements'
 
 module Cloudimage
   class URI
+    using Refinements
+
     include Params
     include CustomHelpers
 
-    attr_reader :uri, :params, :config
+    attr_reader :path, :uri, :params, :config, :sealed_params
 
     def initialize(path, **config)
       @config = config
       @params = {}
-      @uri = build_uri_from(path)
+      @sealed_params = Set.new
+      @path = ensure_path_format(path)
+      @uri = build_uri
     end
 
     PARAMS.each do |param|
       define_method param do |*args|
-        @params[param] = if args.any?
-                           args.join(',')
-                         else
-                           # Flag params don't need to pass in arguments.
-                           @params[param] = 1
-                         end
+        # Flag params don't need to pass in arguments.
+        params[param] = args.any? ? args.join(',') : 1
         self
       end
     end
@@ -36,43 +36,50 @@ module Cloudimage
 
     def to_url(**extra_params)
       set_uri_params(**extra_params)
-      sign_url
+      secure_url
+      uri.to_s
     end
 
     private
 
-    def base_url
+    def site
       "https://#{config[:token]}.cloudimg.io"
     end
 
-    def base_url_with_api_version
-      "#{base_url}/#{config[:api_version]}"
+    def api_version
+      "/#{config[:api_version]}"
     end
 
-    def build_uri_from(path)
-      formatted_path = path.start_with?('/') ? path : "/#{path}"
-      Addressable::URI.parse(base_url_with_api_version + formatted_path)
+    def ensure_path_format(path)
+      path.start_with?('/') ? path : "/#{path}"
+    end
+
+    def request_uri
+      uri.request_uri.delete_prefix(api_version)
+    end
+
+    def build_uri
+      Addressable::URI.parse(site + api_version + path)
     end
 
     def set_uri_params(**extra_params)
+      seal_params(*extra_params.delete(:seal_params))
       url_params = params.merge(**extra_params)
       return unless url_params.any?
 
       uri.query_values = url_params
     end
 
-    def sign_url
-      url = uri.to_s
+    def secure_url
+      return uri.to_s if config[:salt].nil?
 
-      return url if config[:salt].nil?
+      security = Security.new(uri, **config)
 
-      url + "#{uri.query_values ? '&' : '?'}ci_sign=#{signature}"
-    end
-
-    def signature
-      path = uri.to_s.sub(base_url_with_api_version, '')
-      digest = Digest::SHA1.hexdigest(config[:salt] + path)
-      digest[0..(config[:signature_length] - 1)]
+      if config[:sign_urls]
+        security.sign_url(request_uri)
+      else
+        security.seal_url(path, sealed_params)
+      end
     end
   end
 end
