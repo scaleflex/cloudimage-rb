@@ -4,8 +4,13 @@
 
 [Full Changelog](https://github.com/scaleflex/cloudimage-rb/compare/v0.2.1...HEAD)
 
+**Closed issues:**
+
+- Add automatic changelog generation [\#11](https://github.com/scaleflex/cloudimage-rb/issues/11)
+
 **Merged pull requests:**
 
+- Use changelog generation [\#16](https://github.com/scaleflex/cloudimage-rb/pull/16) ([janklimo](https://github.com/janklimo))
 - Add test coverage with SimpleCov [\#9](https://github.com/scaleflex/cloudimage-rb/pull/9) ([janklimo](https://github.com/janklimo))
 
 ## 0.2.1 (2020-06-29)
