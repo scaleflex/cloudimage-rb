@@ -16,7 +16,6 @@ Supports Ruby `2.4` and above, `JRuby`, and `TruffleRuby`.
     - [Custom helpers](#custom-helpers)
     - [Security](#security)
   - [Development](#development)
-    - [TODOs](#todos)
   - [Contributing](#contributing)
   - [License](#license)
   - [Code of Conduct](#code-of-conduct)
@@ -140,13 +139,6 @@ After checking out the repo, run `bin/setup` to install dependencies.
 Then, run `bundle exec rake` to run the tests. You can also run
 `bin/console` for an interactive prompt that will allow you to
 experiment.
-
-### TODOs
-
-- URL sealing
-- Add support for custom CNAMEs
-- `srcset` generation
-- Purge cache API
 
 ## Contributing
 

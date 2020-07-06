@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'bundler/setup'
-require 'pry'
+require 'pry' unless ENV['CI']
 
 # JRuby seems to report incorrect, lower stats.
 unless RUBY_ENGINE == 'jruby'

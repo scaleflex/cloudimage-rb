@@ -22,5 +22,7 @@ Gem::Specification.new do |s|
 
   s.license = 'MIT'
   s.required_ruby_version = Gem::Requirement.new('>= 2.4.0')
-  s.add_dependency 'addressable', '~> 2.7'
+  s.add_runtime_dependency 'addressable', '~> 2.7'
+  s.add_development_dependency 'github_changelog_generator', '~> 1.15.2'
+  s.add_development_dependency 'pry', '~> 0.13'
 end
