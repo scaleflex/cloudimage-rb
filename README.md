@@ -15,6 +15,8 @@ Supports Ruby `2.4` and above, `JRuby`, and `TruffleRuby`.
     - [Aliases](#aliases)
     - [Custom helpers](#custom-helpers)
     - [Security](#security)
+      - [URL signature](#url-signature)
+      - [URL sealing](#url-sealing)
   - [Development](#development)
   - [Contributing](#contributing)
   - [License](#license)
@@ -59,6 +61,7 @@ Cloudimage client accepts the following options:
 | `salt`             | No        | See [Security](#security).                          |
 | `signature_length` | No        | Integer value in the range `6..40`. Defaults to 18. |
 | `api_version`      | No        | Defaults to the current stable version.             |
+| `sign_urls`        | No        | Defaults to `true`. See [Security](#security).      |
 
 Calling `path` on the client object returns an instance of `Cloudimage::URI`.
 It accepts path to the image as a string and we we will use it to build
@@ -121,6 +124,8 @@ For a list of custom helpers available to you, please consult
 
 ### Security
 
+#### URL signature
+
 If `salt` is defined, all URLs will be signed.
 
 You can control the length of the generated signature by specifying `signature_length`
@@ -132,6 +137,46 @@ uri = client.path('/assets/image.png')
 uri.w(200).h(400).to_url
 # => "https://mysecrettoken.cloudimg.io/v7/assets/image.png?h=400&w=200&ci_sign=79cfbc458b"
 ```
+
+#### URL sealing
+
+Whereas URL signatures let you protect your URL from any kind of
+tampering, URL sealing protects the params you specify while making
+it possible to append additional params on the fly.
+
+This is useful when working with Cloudimage's
+[responsive frontend libraries](https://docs.cloudimage.io/go/cloudimage-documentation-v7/en/responsive-images).
+A common use case would be sealing your watermark but letting the
+React client request the best possible width.
+
+To seal your URLs, initialize client with `salt` and set
+`sign_urls` to `false`. `signature_length` setting is applied
+to control the length of the generated `ci_seal` value.
+
+Use the `seal_params` helper to specify which params to seal
+as a list of arguments. These could be symbols or strings.
+
+```ruby
+client = Cloudimage::Client.new(token: 'demoseal', salt: 'test', sign_urls: false)
+
+client
+  .path('/sample.li/birds.jpg')
+  .f('bright:10,contrast:20')
+  .w(300)
+  .h(400)
+  .seal_params(:w, :f)
+  .to_url
+# => "https://demoseal.cloudimg.io/v7/sample.li/birds.jpg?ci_eqs=Zj1icmlnaHQlM0ExMCUyQ2NvbnRyYXN0JTNBMjAmdz0zMDA&ci_seal=67dd8cc44f6ba44ee5&h=400"
+
+# Alternative approach:
+client
+  .path('/sample.li/birds.jpg')
+  .to_url(f: 'bright:10,contrast:20', w: 300, h: 400, seal_params: [:w, :f])
+# => "https://demoseal.cloudimg.io/v7/sample.li/birds.jpg?ci_eqs=Zj1icmlnaHQlM0ExMCUyQ2NvbnRyYXN0JTNBMjAmdz0zMDA&ci_seal=67dd8cc44f6ba44ee5&h=400"
+```
+
+This approach protects `w` and `f` values from being edited but
+makes it possible to freely modify the value of `h`.
 
 ## Development
 
