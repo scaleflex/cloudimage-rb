@@ -1,16 +1,18 @@
 # Changelog
 
-## [Unreleased](https://github.com/scaleflex/cloudimage-rb/tree/HEAD)
+## [v0.3.0](https://github.com/scaleflex/cloudimage-rb/tree/v0.3.0) (2020-07-09)
 
-[Full Changelog](https://github.com/scaleflex/cloudimage-rb/compare/v0.2.1...HEAD)
+[Full Changelog](https://github.com/scaleflex/cloudimage-rb/compare/v0.2.1...v0.3.0)
 
 **Closed issues:**
 
+- Add URL sealing [\#12](https://github.com/scaleflex/cloudimage-rb/issues/12)
 - Add automatic changelog generation [\#11](https://github.com/scaleflex/cloudimage-rb/issues/11)
 
 **Merged pull requests:**
 
 - Use changelog generation [\#16](https://github.com/scaleflex/cloudimage-rb/pull/16) ([janklimo](https://github.com/janklimo))
+- Introduce URL sealing [\#10](https://github.com/scaleflex/cloudimage-rb/pull/10) ([janklimo](https://github.com/janklimo))
 - Add test coverage with SimpleCov [\#9](https://github.com/scaleflex/cloudimage-rb/pull/9) ([janklimo](https://github.com/janklimo))
 
 ## 0.2.1 (2020-06-29)
