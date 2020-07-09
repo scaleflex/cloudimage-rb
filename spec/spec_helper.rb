@@ -6,6 +6,9 @@ require 'pry' unless ENV['CI']
 # JRuby seems to report incorrect, lower stats.
 unless RUBY_ENGINE == 'jruby'
   require 'simplecov'
+  require 'coveralls'
+
+  SimpleCov.formatter = Coveralls::SimpleCov::Formatter
 
   SimpleCov.start do
     minimum_coverage 95
