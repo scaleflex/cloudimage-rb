@@ -1,6 +1,6 @@
 # cloudimage
 
-![](https://github.com/scaleflex/cloudimage-rb/workflows/Build/badge.svg)
+[![Gem Version](https://badge.fury.io/rb/cloudimage.svg)](https://badge.fury.io/rb/cloudimage) ![Build status](https://github.com/scaleflex/cloudimage-rb/workflows/Build/badge.svg)
 
 `cloudimage` is the official Ruby API wrapper for
 [Cloudimage's API](https://docs.cloudimage.io/go/cloudimage-documentation-v7/en/introduction).
@@ -20,7 +20,6 @@ Supports Ruby `2.4` and above, `JRuby`, and `TruffleRuby`.
   - [Development](#development)
   - [Contributing](#contributing)
   - [License](#license)
-  - [Code of Conduct](#code-of-conduct)
   - [Showcase](#showcase)
 
 ## Installation
@@ -60,7 +59,6 @@ Cloudimage client accepts the following options:
 | `token`            | Yes       |                                                     |
 | `salt`             | No        | See [Security](#security).                          |
 | `signature_length` | No        | Integer value in the range `6..40`. Defaults to 18. |
-| `api_version`      | No        | Defaults to the current stable version.             |
 | `sign_urls`        | No        | Defaults to `true`. See [Security](#security).      |
 
 Calling `path` on the client object returns an instance of `Cloudimage::URI`.
@@ -194,14 +192,7 @@ are expected to adhere to the
 
 ## License
 
-The gem is available as open source under the terms of the
-[MIT License](https://opensource.org/licenses/MIT).
-
-## Code of Conduct
-
-Everyone interacting with the project's codebase, issues, and pull
-requests is expected to follow the
-[code of conduct](https://github.com/scaleflex/cloudimage-rb/blob/master/CODE_OF_CONDUCT.md).
+[MIT](https://opensource.org/licenses/MIT)
 
 ## Showcase
 
