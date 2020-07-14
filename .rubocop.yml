@@ -21,6 +21,12 @@ Layout/DotPosition:
 Layout/EmptyLinesAroundAttributeAccessor:
   Enabled: true
 
+Layout/EndAlignment:
+  Description: "This cop checks whether the end keywords are aligned properly."
+  StyleGuide: https://docs.rubocop.org/rubocop/cops_layout.html#layoutendalignment
+  AutoCorrect: true
+  Enabled: true
+
 Layout/ExtraSpacing:
   Description: "Do not use unnecessary spacing."
   Enabled: true
@@ -60,6 +66,11 @@ Layout/SpaceAroundMethodCallOperator:
   Enabled: true
 
 #################### Lint ##################################
+
+Lint/DuplicateElsifCondition:
+  Description: "This cop checks that there are no repeated conditions used in if 'elsif'."
+  StyleGuide: https://docs.rubocop.org/rubocop/cops_lint.html#lintduplicateelsifcondition
+  Enabled: true
 
 Lint/FlipFlop:
   Description: "Checks for flip flops"
@@ -346,6 +357,11 @@ Style/AccessorGrouping:
   StyleGuide: "https://docs.rubocop.org/rubocop/cops_style.html#styleaccessorgrouping"
   Enabled: true
 
+Style/ArrayCoercion:
+  Description: "This cop enforces the use of Array() instead of explicit Array check or [*var]."
+  StyleGuide: https://docs.rubocop.org/rubocop/cops_style.html#stylearraycoercion
+  Enabled: true
+
 Style/ArrayJoin:
   Description: "Use Array#join instead of Array#*."
   StyleGuide: "https://github.com/bbatsov/ruby-style-guide#array-join"
@@ -370,6 +386,11 @@ Style/CaseEquality:
   Description: "Avoid explicit use of the case equality operator(===)."
   StyleGuide: "https://github.com/bbatsov/ruby-style-guide#no-case-equality"
   Enabled: false
+
+Style/CaseLikeIf:
+  Description: "This cop identifies places where if-elsif constructions can be replaced with case-when."
+  StyleGuide: https://docs.rubocop.org/rubocop/cops_style.html#stylecaselikeif
+  Enabled: true
 
 Style/CharacterLiteral:
   Description: "Checks for uses of character literals."
@@ -465,9 +486,19 @@ Style/GuardClause:
   StyleGuide: "https://github.com/bbatsov/ruby-style-guide#no-nested-conditionals"
   Enabled: true
 
+Style/HashAsLastArrayItem:
+  Description: "Checks for presence or absence of braces around hash literal as a last array item depending on configuration."
+  StyleGuide: https://docs.rubocop.org/rubocop/cops_style.html#stylehashaslastarrayitem
+  Enabled: true
+
 Style/HashEachMethods:
   Description: "Use Hash#each_key and Hash#each_value."
   StyleGuide: "https://github.com/rubocop-hq/ruby-style-guide#hash-each"
+  Enabled: true
+
+Style/HashLikeCase:
+  Description: "This cop checks for places where case-when represents a simple 1:1 mapping and can be replaced with a hash lookup."
+  StyleGuide: https://docs.rubocop.org/rubocop/cops_style.html#stylehashlikecase
   Enabled: true
 
 Style/HashTransformKeys:
@@ -592,6 +623,11 @@ Style/RedundantAssignment:
 Style/RedundantFetchBlock:
   Description: "This cop identifies places where fetch(key) { value } can be replaced by fetch(key, value)."
   StyleGuide: "https://docs.rubocop.org/rubocop/0.86/cops_style.html#styleredundantfetchblock"
+  Enabled: true
+
+Style/RedundantFileExtensionInRequire:
+  Description: "This cop checks for the presence of superfluous .rb extension in the filename provided to require and require_relative."
+  StyleGuide: https://docs.rubocop.org/rubocop/cops_style.html#styleredundantfileextensioninrequire
   Enabled: true
 
 Style/RedundantRegexpCharacterClass:
