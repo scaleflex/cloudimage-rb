@@ -89,6 +89,17 @@ describe Cloudimage::URI do
     end
   end
 
+  describe 'aliases' do
+    it 'handles perfix' do
+      prefix = 'https://hello.s3.aws.com/'
+      path = '/assets/image.jpg'
+      url = prefix + path.delete_prefix('/')
+      client = Cloudimage::Client.new(token: @token, aliases: { prefix => '' })
+      expected = @base + path
+      expect(client.path(url).to_url).to eq expected
+    end
+  end
+
   context 'custom helpers' do
     describe 'positionable_crop' do
       it 'returns image URL with params encoded' do

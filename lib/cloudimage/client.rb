@@ -19,6 +19,7 @@ module Cloudimage
         options[:signature_length] || DEFAULT_SIGNATURE_LENGTH
       @config[:api_version] = API_VERSION
       @config[:sign_urls] = options[:sign_urls].nil? ? true : false
+      @config[:aliases] = options[:aliases] || {}
 
       ensure_valid_config
     end
