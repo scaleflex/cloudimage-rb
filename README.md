@@ -12,8 +12,9 @@ Supports Ruby `2.4` and above, `JRuby`, and `TruffleRuby`.
   - [Usage](#usage)
     - [Hash of params](#hash-of-params)
     - [Chainable helpers](#chainable-helpers)
-    - [Aliases](#aliases)
+    - [Method aliases](#method-aliases)
     - [Custom helpers](#custom-helpers)
+    - [URL aliases](#url-aliases)
     - [Security](#security)
       - [URL signature](#url-signature)
       - [URL sealing](#url-sealing)
@@ -54,12 +55,13 @@ client = Cloudimage::Client.new(token: 'mysecrettoken')
 
 Cloudimage client accepts the following options:
 
-| Option             | Required? | Additional info                                     |
-| ------------------ | --------- | --------------------------------------------------- |
-| `token`            | Yes       |                                                     |
-| `salt`             | No        | See [Security](#security).                          |
-| `signature_length` | No        | Integer value in the range `6..40`. Defaults to 18. |
-| `sign_urls`        | No        | Defaults to `true`. See [Security](#security).      |
+| Option             | Required? | Type    | Additional info                                     |
+| ------------------ | --------- | ------- | --------------------------------------------------- |
+| `token`            | Yes       | string  |                                                     |
+| `salt`             | No        | string  | See [Security](#security).                          |
+| `signature_length` | No        | integer | Integer value in the range `6..40`. Defaults to 18. |
+| `sign_urls`        | No        | boolean | Defaults to `true`. See [Security](#security).      |
+| `aliases`          | No        | hash    | See [URL aliases](#url-aliases).                    |
 
 Calling `path` on the client object returns an instance of `Cloudimage::URI`.
 It accepts path to the image as a string and we we will use it to build
@@ -102,7 +104,7 @@ uri.heigth(200).to_url
 This is useful for catching typos and identifying deprecated methods in
 case Cloudimage's API changes.
 
-### Aliases
+### Method aliases
 
 The gem comes with a handful of useful aliases. Consult
 [`Cloudimage::Params`](lib/cloudimage/params.rb) module for their full list.
@@ -119,6 +121,29 @@ need to accept arguments and will be translated into `param=1` in the final URL.
 
 For a list of custom helpers available to you, please consult
 [`Cloudimage::CustomHelpers`](lib/cloudimage/custom_helpers.rb) module.
+
+### URL aliases
+
+Specify [aliases](https://docs.cloudimage.io/go/cloudimage-documentation-v7/en/domains-urls/aliases)
+to automatically replace parts of path with defined values. Aliases is a hash which
+maps strings to be replaced with values to be used instead.
+
+```ruby
+my_alias = 'https://store.s3-us-west-2.amazonaws.com/uploads'
+client = Cloudimage::Client.new(token: 'token', aliases: { my_alias => '_uploads_' })
+client.path('https://store.s3-us-west-2.amazonaws.com/uploads/image.jpg').to_url
+# => "https://token.cloudimg.io/v7/_uploads_/image.jpg"
+```
+
+[URL prefix](https://docs.cloudimage.io/go/cloudimage-documentation-v7/en/domains-urls/origin-url-prefix)
+is just another form of URL alias. Simply make the target value an empty string:
+
+```ruby
+prefix = 'https://store.s3-us-west-2.amazonaws.com/uploads/'
+client = Cloudimage::Client.new(token: 'token', aliases: { prefix => '' })
+client.path('https://store.s3-us-west-2.amazonaws.com/uploads/image.jpg').to_url
+# => "https://token.cloudimg.io/v7/image.jpg"
+```
 
 ### Security
 

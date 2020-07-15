@@ -18,7 +18,7 @@ module Cloudimage
       @config = config
       @params = {}
       @sealed_params = Set.new
-      @path = ensure_path_format(path)
+      @path = transform(path)
       @uri = build_uri
     end
 
@@ -50,8 +50,20 @@ module Cloudimage
       "/#{config[:api_version]}"
     end
 
-    def ensure_path_format(path)
-      path.start_with?('/') ? path : "/#{path}"
+    def transform(path)
+      path
+        .then { |input| input.start_with?('/') ? input : "/#{input}" }
+        .then(&method(:apply_aliases))
+    end
+
+    def apply_aliases(path)
+      return path if config[:aliases].empty?
+
+      path.dup.tap do |input|
+        config[:aliases].each do |source, target|
+          input.gsub!(source, target)
+        end
+      end
     end
 
     def request_uri

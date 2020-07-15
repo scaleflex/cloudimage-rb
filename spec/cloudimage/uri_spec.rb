@@ -89,6 +89,33 @@ describe Cloudimage::URI do
     end
   end
 
+  describe 'aliases' do
+    before { @url = 'https://hello.s3.aws.com/assets/image.jpg' }
+
+    it 'handles prefix' do
+      replace = 'https://hello.s3.aws.com/'
+      client = Cloudimage::Client.new(token: @token, aliases: { replace => '' })
+      expected = @base + '/assets/image.jpg'
+      expect(client.path(@url).to_url).to eq expected
+    end
+
+    it 'supports multiple aliases' do
+      hello = 'https://hello.s3.aws.com'
+      uploads = 'https://store.s3-us-west-2.amazonaws.com/uploads'
+      client = Cloudimage::Client.new(
+        token: @token,
+        aliases: { hello => '_hello_', uploads => '_uploads_' },
+      )
+
+      expected = @base + '/_hello_/assets/image.jpg'
+      expect(client.path(@url).to_url).to eq expected
+
+      url = uploads + '/assets/image.jpg'
+      expected = @base + '/_uploads_/assets/image.jpg'
+      expect(client.path(url).to_url).to eq expected
+    end
+  end
+
   context 'custom helpers' do
     describe 'positionable_crop' do
       it 'returns image URL with params encoded' do
