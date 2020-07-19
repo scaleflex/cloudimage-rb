@@ -10,6 +10,7 @@ unless ENV['CI']
     config.user = 'scaleflex'
     config.project = 'cloudimage-rb'
     config.since_tag = 'v0.2.1'
+    config.issues = false
   end
 end
 
