@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
-require_relative 'lib/cloudimage/version'
-
 Gem::Specification.new do |s|
   s.name = 'cloudimage'
-  s.version = Cloudimage::VERSION
+  s.version = '0.4.0'
   s.authors = ['Jan Klimo']
   s.email = ['jan.klimo@gmail.com']
   s.summary = "Official API wrapper for Cloudimage's API."
