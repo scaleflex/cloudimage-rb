@@ -116,6 +116,13 @@ describe Cloudimage::URI do
     end
   end
 
+  it 'handles custom CNAMEs' do
+    client = Cloudimage::Client.new(cname: 'img.klimo.io')
+    base = 'https://img.klimo.io/v7'
+    path = '/assets/image.jpg'
+    expect(client.path(path).to_url).to eq base + path
+  end
+
   context 'custom helpers' do
     describe 'positionable_crop' do
       it 'returns image URL with params encoded' do

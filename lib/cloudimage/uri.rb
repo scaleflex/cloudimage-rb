@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'set'
+
 require_relative 'params'
 require_relative 'custom_helpers'
 require_relative 'security'
@@ -43,6 +45,8 @@ module Cloudimage
     private
 
     def site
+      return "https://#{config[:cname]}" if config[:cname]
+
       "https://#{config[:token]}.cloudimg.io"
     end
 

@@ -2,9 +2,14 @@
 
 describe Cloudimage::Client do
   describe 'initialization' do
-    it 'raises an error without a token' do
+    it 'raises an error without a token or a CNAME' do
       expect { described_class.new }
-        .to raise_error Cloudimage::InvalidConfig, /Cloudimage customer token/
+        .to raise_error Cloudimage::InvalidConfig, /specify your customer token/
+    end
+
+    it 'accepts CNAME config' do
+      expect { described_class.new(cname: 'img.example.com') }
+        .not_to raise_error
     end
 
     context 'URL signatures' do

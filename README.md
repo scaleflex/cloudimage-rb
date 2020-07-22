@@ -15,6 +15,7 @@ Supports Ruby `2.4` and above, `JRuby`, and `TruffleRuby`.
     - [Method aliases](#method-aliases)
     - [Custom helpers](#custom-helpers)
     - [URL aliases](#url-aliases)
+    - [CNAME](#cname)
     - [Security](#security)
       - [URL signature](#url-signature)
       - [URL sealing](#url-sealing)
@@ -41,7 +42,7 @@ Or install it yourself as:
 
 ## Usage
 
-The only requirement to get started is your customer token. You can
+The most common way to use Cloudimage is by means of your customer token. You can
 find it within your Admin interface:
 
 ![token](docs/token.png)
@@ -55,13 +56,14 @@ client = Cloudimage::Client.new(token: 'mysecrettoken')
 
 Cloudimage client accepts the following options:
 
-| Option             | Required? | Type    | Additional info                                     |
-| ------------------ | --------- | ------- | --------------------------------------------------- |
-| `token`            | Yes       | string  |                                                     |
-| `salt`             | No        | string  | See [Security](#security).                          |
-| `signature_length` | No        | integer | Integer value in the range `6..40`. Defaults to 18. |
-| `sign_urls`        | No        | boolean | Defaults to `true`. See [Security](#security).      |
-| `aliases`          | No        | hash    | See [URL aliases](#url-aliases).                    |
+| Option             | Type    | Additional info                                               |
+| ------------------ | ------- | ------------------------------------------------------------- |
+| `token`            | string  | Required if `cname` is missing.                               |
+| `cname`            | string  | Required if `token` is missing. See [CNAME](#cname).          |
+| `salt`             | string  | Optional. See [Security](#security).                          |
+| `signature_length` | integer | Optional. Integer value in the range `6..40`. Defaults to 18. |
+| `sign_urls`        | boolean | Optional. Defaults to `true`. See [Security](#security).      |
+| `aliases`          | hash    | Optional. See [URL aliases](#url-aliases).                    |
 
 Calling `path` on the client object returns an instance of `Cloudimage::URI`.
 It accepts path to the image as a string and we we will use it to build
@@ -143,6 +145,17 @@ prefix = 'https://store.s3-us-west-2.amazonaws.com/uploads/'
 client = Cloudimage::Client.new(token: 'token', aliases: { prefix => '' })
 client.path('https://store.s3-us-west-2.amazonaws.com/uploads/image.jpg').to_url
 # => "https://token.cloudimg.io/v7/image.jpg"
+```
+
+### CNAME
+
+If you have a custom CNAME configured for your account, you can
+use it to initialize the client:
+
+```ruby
+client = Cloudimage::Client.new(cname: 'img.klimo.io')
+client.path('/assets/image.jpg').to_url
+# => 'https://img.klimo.io/v7/assets/image.jpg'
 ```
 
 ### Security
