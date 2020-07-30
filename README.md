@@ -19,6 +19,7 @@ Supports Ruby `2.4` and above, `JRuby`, and `TruffleRuby`.
     - [Security](#security)
       - [URL signature](#url-signature)
       - [URL sealing](#url-sealing)
+    - [Invalidation API](#invalidation-api)
   - [Development](#development)
   - [Contributing](#contributing)
   - [License](#license)
@@ -213,6 +214,29 @@ client
 
 This approach protects `w` and `f` values from being edited but
 makes it possible to freely modify the value of `h`.
+
+### Invalidation API
+
+To access invalidation API you'll need to initialize client with
+an API token.
+
+The provided helper methods accept any number of strings:
+
+```ruby
+client = Cloudimage::Client.new(token: 'token', api_key: 'key')
+
+# Invalidate original
+client.invalidate_original('/v7/image.jpg')
+
+# Invalidate URLs
+client.invalidate_urls('/v7/image.jpg?w=200', '/v7/image.jpg?h=300')
+
+# Invalidate all
+client.invalidate_all
+```
+
+Consult the [API docs](https://docs.cloudimage.io/go/cloudimage-documentation-v7/en/caching-acceleration/invalidation-api)
+for further details.
 
 ## Development
 

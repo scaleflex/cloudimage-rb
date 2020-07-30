@@ -1,0 +1,9 @@
+{
+  "status": "success",
+  "msg": "Your invalidation request has been received",
+  "invalidation": {
+    "status": "RECEIVED",
+    "uuid": "b23493d9-28ed-4b7d-80f0-467a39e51de2",
+    "added_at": "2020-08-01 09:57:37.310344"
+  }
+}
