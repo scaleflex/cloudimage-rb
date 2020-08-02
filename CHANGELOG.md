@@ -1,5 +1,14 @@
 # Changelog
 
+## [v0.5.0](https://github.com/scaleflex/cloudimage-rb/tree/v0.5.0) (2020-08-02)
+
+[Full Changelog](https://github.com/scaleflex/cloudimage-rb/compare/v0.4.0...v0.5.0)
+
+**Implemented enhancements:**
+
+- Invalidation [\#24](https://github.com/scaleflex/cloudimage-rb/pull/24) ([janklimo](https://github.com/janklimo))
+- Add support for custom CNAMEs [\#21](https://github.com/scaleflex/cloudimage-rb/pull/21) ([janklimo](https://github.com/janklimo))
+
 ## [v0.4.0](https://github.com/scaleflex/cloudimage-rb/tree/v0.4.0) (2020-07-19)
 
 [Full Changelog](https://github.com/scaleflex/cloudimage-rb/compare/v0.3.0...v0.4.0)
@@ -15,7 +24,6 @@
 **Implemented enhancements:**
 
 - Introduce URL sealing [\#10](https://github.com/scaleflex/cloudimage-rb/pull/10) ([janklimo](https://github.com/janklimo))
-- Add support for image resizing [\#2](https://github.com/scaleflex/cloudimage-rb/pull/2) ([janklimo](https://github.com/janklimo))
 
 **Merged pull requests:**
 
