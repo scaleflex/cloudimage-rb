@@ -65,6 +65,7 @@ Cloudimage client accepts the following options:
 | `signature_length` | integer | Optional. Integer value in the range `6..40`. Defaults to 18. |
 | `sign_urls`        | boolean | Optional. Defaults to `true`. See [Security](#security).      |
 | `aliases`          | hash    | Optional. See [URL aliases](#url-aliases).                    |
+| `api_key`          | string  | Optional. See [Invalidation API](#invalidation-api).          |
 
 Calling `path` on the client object returns an instance of `Cloudimage::URI`.
 It accepts path to the image as a string and we we will use it to build
@@ -218,7 +219,7 @@ makes it possible to freely modify the value of `h`.
 ### Invalidation API
 
 To access invalidation API you'll need to initialize client with
-an API token.
+an API key.
 
 The provided helper methods accept any number of strings:
 
