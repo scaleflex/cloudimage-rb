@@ -11,7 +11,7 @@ describe Cloudimage::Security do
     context 'no params' do
       it 'returns signed image URL' do
         client = Cloudimage::Client.new(token: 'token', salt: 'salt')
-        expected = @base + '/assets/image.jpg?ci_sign=8e71efd440164f3cc8'
+        expected = "#{@base}/assets/image.jpg?ci_sign=8e71efd440164f3cc8"
         expect(client.path('/assets/image.jpg').to_url).to eq expected
       end
     end
@@ -19,7 +19,7 @@ describe Cloudimage::Security do
     context 'salt given' do
       it 'returns signed image URL' do
         client = Cloudimage::Client.new(token: @token, salt: 'salt')
-        expected = @base + '/assets/image.jpg?ci_sign=84c81ef20852013046&w=200'
+        expected = "#{@base}/assets/image.jpg?ci_sign=84c81ef20852013046&w=200"
         expect(client.path('/assets/image.jpg').w(200).to_url).to eq expected
       end
 
@@ -29,14 +29,14 @@ describe Cloudimage::Security do
           salt: 'salt',
           signature_length: 8,
         )
-        expected = @base + '/assets/image.jpg?ci_sign=84c81ef2&w=200'
+        expected = "#{@base}/assets/image.jpg?ci_sign=84c81ef2&w=200"
         expect(client.path('/assets/image.jpg').w(200).to_url).to eq expected
       end
 
       it 'handles a mix of helpers and to_url params' do
         client = Cloudimage::Client.new(token: @token, salt: 'salt')
-        expected = @base +
-          '/assets/image.jpg?ci_info=1&ci_sign=40bd5a1d99455fe5cf&h=100&w=200'
+        expected = "#{@base}/assets/image.jpg?ci_info=1&" \
+          'ci_sign=40bd5a1d99455fe5cf&h=100&w=200'
         expect(client.path('/assets/image.jpg').debug.to_url(w: 200, h: 100))
           .to eq expected
       end
@@ -51,7 +51,7 @@ describe Cloudimage::Security do
 
     context 'no params' do
       it 'returns sealed image path' do
-        expected = @base + '/assets/image.jpg?ci_seal=57e9278520bd99de50'
+        expected = "#{@base}/assets/image.jpg?ci_seal=57e9278520bd99de50"
         expect(@client.path('/assets/image.jpg').to_url).to eq expected
       end
 
@@ -62,14 +62,14 @@ describe Cloudimage::Security do
           sign_urls: false,
           signature_length: 8,
         )
-        expected = @base + '/assets/image.jpg?ci_seal=57e92785'
+        expected = "#{@base}/assets/image.jpg?ci_seal=57e92785"
         expect(client.path('/assets/image.jpg').to_url).to eq expected
       end
     end
 
     context 'no sealed params' do
       it 'returns sealed image path with params appended' do
-        expected = @base + '/assets/image.jpg?ci_seal=57e9278520bd99de50&w=200'
+        expected = "#{@base}/assets/image.jpg?ci_seal=57e9278520bd99de50&w=200"
         expect(@client.path('/assets/image.jpg').w(200).to_url).to eq expected
       end
     end
