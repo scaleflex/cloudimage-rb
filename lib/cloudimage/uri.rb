@@ -75,7 +75,11 @@ module Cloudimage
     end
 
     def build_uri
-      Addressable::URI.parse(site + api_version + path)
+      if config[:include_api_version]
+        Addressable::URI.parse(site + api_version + path)
+      else
+        Addressable::URI.parse(site + path)
+      end
     end
 
     def set_uri_params(**extra_params)

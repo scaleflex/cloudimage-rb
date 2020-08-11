@@ -123,6 +123,14 @@ describe Cloudimage::URI do
     expect(client.path(path).to_url).to eq base + path
   end
 
+  it 'allows for optional API version inclusion' do
+    client = Cloudimage::Client.new(cname: 'img.klimo.io',
+                                    include_api_version: false)
+    base = 'https://img.klimo.io'
+    path = '/assets/image.jpg'
+    expect(client.path(path).to_url).to eq base + path
+  end
+
   context 'custom helpers' do
     describe 'positionable_crop' do
       it 'returns image URL with params encoded' do
