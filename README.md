@@ -16,6 +16,7 @@ Supports Ruby `2.4` and above, `JRuby`, and `TruffleRuby`.
     - [Custom helpers](#custom-helpers)
     - [URL aliases](#url-aliases)
     - [CNAME](#cname)
+    - [Optional API version](#optional-api-version)
     - [Security](#security)
       - [URL signature](#url-signature)
       - [URL sealing](#url-sealing)
@@ -57,15 +58,16 @@ client = Cloudimage::Client.new(token: 'mysecrettoken')
 
 Cloudimage client accepts the following options:
 
-| Option             | Type    | Additional info                                               |
-| ------------------ | ------- | ------------------------------------------------------------- |
-| `token`            | string  | Required if `cname` is missing.                               |
-| `cname`            | string  | Required if `token` is missing. See [CNAME](#cname).          |
-| `salt`             | string  | Optional. See [Security](#security).                          |
-| `signature_length` | integer | Optional. Integer value in the range `6..40`. Defaults to 18. |
-| `sign_urls`        | boolean | Optional. Defaults to `true`. See [Security](#security).      |
-| `aliases`          | hash    | Optional. See [URL aliases](#url-aliases).                    |
-| `api_key`          | string  | Optional. See [Invalidation API](#invalidation-api).          |
+| Option                | Type    | Additional info                                                                |
+| --------------------- | ------- | ------------------------------------------------------------------------------ |
+| `token`               | string  | Required if `cname` is missing.                                                |
+| `cname`               | string  | Required if `token` is missing. See [CNAME](#cname).                           |
+| `salt`                | string  | Optional. See [Security](#security).                                           |
+| `signature_length`    | integer | Optional. Integer value in the range `6..40`. Defaults to 18.                  |
+| `sign_urls`           | boolean | Optional. Defaults to `true`. See [Security](#security).                       |
+| `aliases`             | hash    | Optional. See [URL aliases](#url-aliases).                                     |
+| `api_key`             | string  | Optional. See [Invalidation API](#invalidation-api).                           |
+| `include_api_version` | boolean | Optional. Defaults to true. See [Optional API version](#optional-api-version). |
 
 Calling `path` on the client object returns an instance of `Cloudimage::URI`.
 It accepts path to the image as a string and we we will use it to build
@@ -158,6 +160,17 @@ use it to initialize the client:
 client = Cloudimage::Client.new(cname: 'img.klimo.io')
 client.path('/assets/image.jpg').to_url
 # => 'https://img.klimo.io/v7/assets/image.jpg'
+```
+
+### Optional API version
+
+If your account is configured to work without the API version component in the URL,
+you can configure client not to include it in the generated URL:
+
+```ruby
+client = Cloudimage::Client.new(cname: 'img.klimo.io', include_api_version: false)
+client.path('/assets/image.jpg').to_url
+# => "https://img.klimo.io/assets/image.jpg"
 ```
 
 ### Security
