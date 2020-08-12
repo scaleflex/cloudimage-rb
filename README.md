@@ -14,6 +14,7 @@ Supports Ruby `2.4` and above, `JRuby`, and `TruffleRuby`.
     - [Method aliases](#method-aliases)
     - [Custom helpers](#custom-helpers)
     - [URL aliases](#url-aliases)
+    - [`srcset` generation](#srcset-generation)
     - [CNAME](#cname)
     - [Optional API version](#optional-api-version)
     - [Security](#security)
@@ -156,6 +157,20 @@ client = Cloudimage::Client.new(token: 'token')
 client.path('https://token.cloudimg.io/v7/image.jpg').to_url(w: 200)
 => "https://token.cloudimg.io/v7/image.jpg?w=200"
 ```
+
+### `srcset` generation
+
+Use the provided `to_srcset` method which also accepts any additional params to
+be applied to the `srcset` URLs:
+
+```ruby
+client = Cloudimage::Client.new(token: 'token')
+client.path('/assets/image.jpg').to_srcset(blur: 5)
+# => "https://token.cloudimg.io/v7/assets/image.jpg?blur=5&w=100 100w, https://token.cloudimg.io/v7/assets/image.jpg?blur=5&w=170 170w, https://token.cloudimg.io/v7/assets/image.jpg?blur=5&w=280 280w, https://token.cloudimg.io/v7/assets/image.jpg?blur=5&w=470 470w, https://token.cloudimg.io/v7/assets/image.jpg?blur=5&w=780 780w, https://token.cloudimg.io/v7/assets/image.jpg?blur=5&w=1300 1300w, https://token.cloudimg.io/v7/assets/image.jpg?blur=5&w=2170 2170w, https://token.cloudimg.io/v7/assets/image.jpg?blur=5&w=3620 3620w, https://token.cloudimg.io/v7/assets/image.jpg?blur=5&w=5760 5760w"
+```
+
+A growth factor is applied to exponentially distribute widths between 100 and 5760 pixels.
+See [`Cloudimage::Srcset`](/lib/cloudimage/srcset.rb) for implementation details.
 
 ### CNAME
 

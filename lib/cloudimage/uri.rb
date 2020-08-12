@@ -5,6 +5,7 @@ require 'set'
 require_relative 'params'
 require_relative 'custom_helpers'
 require_relative 'security'
+require_relative 'srcset'
 require_relative 'refinements'
 
 module Cloudimage
@@ -13,6 +14,7 @@ module Cloudimage
 
     include Params
     include CustomHelpers
+    include Srcset
 
     attr_reader :path, :uri, :params, :config, :sealed_params
 
