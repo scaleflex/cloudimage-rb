@@ -114,6 +114,20 @@ describe Cloudimage::URI do
       expected = "#{@base}/_uploads_/assets/image.jpg"
       expect(client.path(url).to_url).to eq expected
     end
+
+    it 'supports automatic alias' do
+      path = '/assets/image.jpg'
+      url = "#{@base}#{path}"
+      expect(@client.path(url).to_url).to eq url
+    end
+
+    it 'supports automatic alias when API version is toggled off' do
+      client = Cloudimage::Client.new(cname: 'img.klimo.io',
+                                      include_api_version: false)
+      base = 'https://img.klimo.io'
+      path = '/assets/image.jpg'
+      expect(client.path(base + path).to_url).to eq base + path
+    end
   end
 
   it 'handles custom CNAMEs' do

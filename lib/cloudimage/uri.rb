@@ -61,13 +61,17 @@ module Cloudimage
     end
 
     def apply_aliases(path)
-      return path if config[:aliases].empty?
+      config[:aliases][default_alias] = ''
 
       path.dup.tap do |input|
         config[:aliases].each do |source, target|
-          input.gsub!(source, target)
+          input.sub!(source, target)
         end
       end
+    end
+
+    def default_alias
+      config[:include_api_version] ? "#{site}#{api_version}/" : "#{site}/"
     end
 
     def request_uri

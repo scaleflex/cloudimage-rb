@@ -2,8 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/cloudimage.svg)](https://badge.fury.io/rb/cloudimage) ![Build status](https://github.com/scaleflex/cloudimage-rb/workflows/Build/badge.svg)
 
-`cloudimage` is the official Ruby API wrapper for
-[Cloudimage's API](https://docs.cloudimage.io/go/cloudimage-documentation-v7/en/introduction).
+`cloudimage` is the official Ruby API wrapper for [Cloudimage's API][docs].
 
 Supports Ruby `2.4` and above, `JRuby`, and `TruffleRuby`.
 
@@ -130,9 +129,8 @@ For a list of custom helpers available to you, please consult
 
 ### URL aliases
 
-Specify [aliases](https://docs.cloudimage.io/go/cloudimage-documentation-v7/en/domains-urls/aliases)
-to automatically replace parts of path with defined values. Aliases is a hash which
-maps strings to be replaced with values to be used instead.
+Specify [aliases][aliases] to automatically replace parts of path with defined values.
+Aliases is a hash which maps strings to be replaced with values to be used instead.
 
 ```ruby
 my_alias = 'https://store.s3-us-west-2.amazonaws.com/uploads'
@@ -141,14 +139,22 @@ client.path('https://store.s3-us-west-2.amazonaws.com/uploads/image.jpg').to_url
 # => "https://token.cloudimg.io/v7/_uploads_/image.jpg"
 ```
 
-[URL prefix](https://docs.cloudimage.io/go/cloudimage-documentation-v7/en/domains-urls/origin-url-prefix)
-is just another form of URL alias. Simply make the target value an empty string:
+[URL prefix][url-prefix] is just another form of URL alias. Simply make the target value an empty string:
 
 ```ruby
 prefix = 'https://store.s3-us-west-2.amazonaws.com/uploads/'
 client = Cloudimage::Client.new(token: 'token', aliases: { prefix => '' })
 client.path('https://store.s3-us-west-2.amazonaws.com/uploads/image.jpg').to_url
 # => "https://token.cloudimg.io/v7/image.jpg"
+```
+
+You don't need to specify an alias if the input to `path` is a URL that
+already matches the base of the generated URL:
+
+```ruby
+client = Cloudimage::Client.new(token: 'token')
+client.path('https://token.cloudimg.io/v7/image.jpg').to_url(w: 200)
+=> "https://token.cloudimg.io/v7/image.jpg?w=200"
 ```
 
 ### CNAME
@@ -195,8 +201,7 @@ Whereas URL signatures let you protect your URL from any kind of
 tampering, URL sealing protects the params you specify while making
 it possible to append additional params on the fly.
 
-This is useful when working with Cloudimage's
-[responsive frontend libraries](https://docs.cloudimage.io/go/cloudimage-documentation-v7/en/responsive-images).
+This is useful when working with Cloudimage's [responsive frontend libraries][responsive-images].
 A common use case would be sealing your watermark but letting the
 React client request the best possible width.
 
@@ -249,8 +254,7 @@ client.invalidate_urls('/v7/image.jpg?w=200', '/v7/image.jpg?h=300')
 client.invalidate_all
 ```
 
-Consult the [API docs](https://docs.cloudimage.io/go/cloudimage-documentation-v7/en/caching-acceleration/invalidation-api)
-for further details.
+Consult the [invalidation API docs][invalidation-docs] for further details.
 
 ## Development
 
@@ -263,8 +267,7 @@ experiment.
 
 Bug reports and pull requests are welcome. This project is intended
 to be a safe, welcoming space for collaboration, and contributors
-are expected to adhere to the
-[code of conduct](https://github.com/scaleflex/cloudimage-rb/blob/master/CODE_OF_CONDUCT.md).
+are expected to adhere to the [code of conduct][code-of-conduct].
 
 ## License
 
@@ -274,7 +277,15 @@ are expected to adhere to the
 
 Among others, `cloudimage` is used to power the following apps:
 
-- [Robin PRO](https://apps.shopify.com/robin-pro-image-gallery) - Fast, beautiful, mobile-friendly image galleries for Shopify stores.
+- [Robin PRO][robin-pro] - Fast, beautiful, mobile-friendly image galleries for Shopify stores.
 
 Using this gem in your app? Let us know in [this issue](https://github.com/scaleflex/cloudimage-rb/issues/8)
 so that we can feature it.
+
+[aliases]: https://docs.cloudimage.io/go/cloudimage-documentation-v7/en/domains-urls/aliases
+[code-of-conduct]: https://github.com/scaleflex/cloudimage-rb/blob/master/CODE_OF_CONDUCT.md
+[docs]: https://docs.cloudimage.io/go/cloudimage-documentation-v7/en/introduction
+[invalidation-docs]: https://docs.cloudimage.io/go/cloudimage-documentation-v7/en/caching-acceleration/invalidation-api
+[responsive-images]: https://docs.cloudimage.io/go/cloudimage-documentation-v7/en/responsive-images
+[robin-pro]: https://apps.shopify.com/robin-pro-image-gallery
+[url-prefix]: https://docs.cloudimage.io/go/cloudimage-documentation-v7/en/domains-urls/origin-url-prefix
