@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = 'cloudimage'
-  s.version = '0.5.0'
+  s.version = '0.6.0'
   s.authors = ['Jan Klimo']
   s.email = ['jan.klimo@gmail.com']
   s.summary = "Official API wrapper for Cloudimage's API."
