@@ -4,7 +4,7 @@
 
 [Full Changelog](https://github.com/scaleflex/cloudimage-rb/compare/v0.5.0...v0.6.0)
 
-**Merged pull requests:**
+**Implemented enhancements:**
 
 - Add srcset generation [\#27](https://github.com/scaleflex/cloudimage-rb/pull/27) ([janklimo](https://github.com/janklimo))
 - Add default alias [\#26](https://github.com/scaleflex/cloudimage-rb/pull/26) ([janklimo](https://github.com/janklimo))
