@@ -293,6 +293,7 @@ are expected to adhere to the [code of conduct][code-of-conduct].
 Among others, `cloudimage` is used to power the following apps:
 
 - [Robin PRO][robin-pro] - Fast, beautiful, mobile-friendly image galleries for Shopify stores.
+- [Spotlightify][spotlightify] - Turning the spotlight on the best Shopify stores.
 
 Using this gem in your app? Let us know in [this issue](https://github.com/scaleflex/cloudimage-rb/issues/8)
 so that we can feature it.
@@ -303,4 +304,5 @@ so that we can feature it.
 [invalidation-docs]: https://docs.cloudimage.io/go/cloudimage-documentation-v7/en/caching-acceleration/invalidation-api
 [responsive-images]: https://docs.cloudimage.io/go/cloudimage-documentation-v7/en/responsive-images
 [robin-pro]: https://apps.shopify.com/robin-pro-image-gallery
+[spotlightify]: https://www.spotlightify.com/
 [url-prefix]: https://docs.cloudimage.io/go/cloudimage-documentation-v7/en/domains-urls/origin-url-prefix
