@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.6.1](https://github.com/scaleflex/cloudimage-rb/tree/v0.6.1) (2020-09-13)
+
+[Full Changelog](https://github.com/scaleflex/cloudimage-rb/compare/v0.6.0...v0.6.1)
+
+**Fixed bugs:**
+
+- Handle frozen aliases hashes [\#29](https://github.com/scaleflex/cloudimage-rb/pull/29) ([janklimo](https://github.com/janklimo))
+
 ## [v0.6.0](https://github.com/scaleflex/cloudimage-rb/tree/v0.6.0) (2020-08-16)
 
 [Full Changelog](https://github.com/scaleflex/cloudimage-rb/compare/v0.5.0...v0.6.0)
