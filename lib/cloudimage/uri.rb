@@ -63,10 +63,13 @@ module Cloudimage
     end
 
     def apply_aliases(path)
-      config[:aliases][default_alias] = ''
+      # path and aliases can be frozen
+      aliases = config[:aliases].dup
+
+      aliases[default_alias] = ''
 
       path.dup.tap do |input|
-        config[:aliases].each do |source, target|
+        aliases.each do |source, target|
           input.sub!(source, target)
         end
       end

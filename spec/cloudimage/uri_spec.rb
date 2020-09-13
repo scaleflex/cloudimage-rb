@@ -128,6 +128,13 @@ describe Cloudimage::URI do
       path = '/assets/image.jpg'
       expect(client.path(base + path).to_url).to eq base + path
     end
+
+    it 'handles frozen hashes' do
+      aliases = { 'https://hello.s3.aws.com/' => '' }.freeze
+      client = Cloudimage::Client.new(token: @token, aliases: aliases)
+      expected = "#{@base}/assets/image.jpg"
+      expect(client.path(@url).to_url).to eq expected
+    end
   end
 
   it 'handles custom CNAMEs' do
