@@ -5,6 +5,7 @@ require:
 AllCops:
   DisplayStyleGuide: true
   ExtraDetails: true
+  NewCops: enable
   RSpec:
     Patterns:
       - _spec.rb
