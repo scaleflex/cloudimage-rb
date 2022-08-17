@@ -39,7 +39,9 @@ module Cloudimage
         def then
           return yield_self unless block_given?
 
+          # rubocop:disable Style/ObjectThen
           yield_self(&::Proc.new)
+          # rubocop:enable Style/ObjectThen
         end
       end
     end

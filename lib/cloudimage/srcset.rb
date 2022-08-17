@@ -23,7 +23,7 @@ module Cloudimage
           widths << current
           current = (current * SRCSET_GROWTH_FACTOR).round(-1)
 
-          break if current >= SRCSET_RANGE.end && widths << SRCSET_RANGE.end
+          break if current >= SRCSET_RANGE.end && (widths << SRCSET_RANGE.end)
         end
       end
     end

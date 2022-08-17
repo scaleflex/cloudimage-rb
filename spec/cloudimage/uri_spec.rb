@@ -52,7 +52,7 @@ describe Cloudimage::URI do
 
     it 'handles filter concatenation with param encoding' do
       expected = "#{@base}/assets/image.jpg?" \
-        'f=bright%3A15%2Ccontrast%3A30%2Cgrey'
+                 'f=bright%3A15%2Ccontrast%3A30%2Cgrey'
       uri = @client.path('/assets/image.jpg')
         .f('bright:15', 'contrast:30', 'grey')
       expect(uri.to_url).to eq expected

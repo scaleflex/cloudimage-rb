@@ -36,7 +36,7 @@ describe Cloudimage::Security do
       it 'handles a mix of helpers and to_url params' do
         client = Cloudimage::Client.new(token: @token, salt: 'salt')
         expected = "#{@base}/assets/image.jpg?ci_info=1&" \
-          'ci_sign=40bd5a1d99455fe5cf&h=100&w=200'
+                   'ci_sign=40bd5a1d99455fe5cf&h=100&w=200'
         expect(client.path('/assets/image.jpg').debug.to_url(w: 200, h: 100))
           .to eq expected
       end
@@ -76,8 +76,9 @@ describe Cloudimage::Security do
 
     context 'sealed params' do
       it 'returns sealed image URL' do
-        expected = @base + '/assets/image.jpg?' \
-          'ci_eqs=Ymx1cj0yMCZoPTMwMCZ3PTMwMA&ci_seal=b7b7a8fde707bed4b4'
+        expected =
+          @base + '/assets/image.jpg?' \
+                  'ci_eqs=Ymx1cj0yMCZoPTMwMCZ3PTMwMA&ci_seal=b7b7a8fde707bed4b4'
 
         # Using basic encode64 for these params would add padding, so here
         # we're testing no padding is added to the eqs value.
@@ -91,8 +92,9 @@ describe Cloudimage::Security do
       end
 
       it 'understands partial seal' do
-        expected = @base + '/assets/image.jpg?' \
-          'ci_eqs=Ymx1cj0yMCZoPTMwMA&ci_seal=a49adc8f592ef99188&w=100'
+        expected =
+          @base + '/assets/image.jpg?' \
+                  'ci_eqs=Ymx1cj0yMCZoPTMwMA&ci_seal=a49adc8f592ef99188&w=100'
 
         result = @client.path('/assets/image.jpg')
           .w(100)
@@ -104,8 +106,9 @@ describe Cloudimage::Security do
       end
 
       it 'works with params passed into to_url' do
-        expected = @base + '/assets/image.jpg?' \
-          'ci_eqs=Ymx1cj0yMCZoPTMwMCZ3PTMwMA&ci_seal=b7b7a8fde707bed4b4'
+        expected =
+          @base + '/assets/image.jpg?' \
+                  'ci_eqs=Ymx1cj0yMCZoPTMwMCZ3PTMwMA&ci_seal=b7b7a8fde707bed4b4'
         result = @client.path('/assets/image.jpg').to_url(
           blur: 20, w: 300, h: 300, seal_params: %i[w h blur],
         )
@@ -113,8 +116,9 @@ describe Cloudimage::Security do
       end
 
       it 'works when params are passed in steps' do
-        expected = @base + '/assets/image.jpg?' \
-          'ci_eqs=Ymx1cj0yMCZoPTMwMA&ci_seal=a49adc8f592ef99188&w=100'
+        expected =
+          @base + '/assets/image.jpg?' \
+                  'ci_eqs=Ymx1cj0yMCZoPTMwMA&ci_seal=a49adc8f592ef99188&w=100'
 
         uri = @client.path('/assets/image.jpg')
         uri.w(100).h(300).seal_params(:h)

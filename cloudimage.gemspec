@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
     'changelog_uri' => 'https://github.com/scaleflex/cloudimage-rb/blob/master/CHANGELOG.md',
     'source_code_uri' => 'https://github.com/scaleflex/cloudimage-rb',
     'documentation_uri' => 'https://docs.cloudimage.io/go/cloudimage-documentation-v7/en/introduction',
+    'rubygems_mfa_required' => 'true',
   }
 
   s.license = 'MIT'

@@ -59,7 +59,7 @@ module Cloudimage
     def transform(path)
       path
         .then { |input| input.start_with?('/') ? input : "/#{input}" }
-        .then(&method(:apply_aliases))
+        .then { |input| apply_aliases(input) }
     end
 
     def apply_aliases(path)

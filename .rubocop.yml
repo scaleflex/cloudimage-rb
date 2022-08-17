@@ -1,15 +1,12 @@
 require:
   - rubocop-performance
+  - rubocop-rake
   - rubocop-rspec
 
 AllCops:
   DisplayStyleGuide: true
   ExtraDetails: true
   NewCops: enable
-  RSpec:
-    Patterns:
-      - _spec.rb
-      - "(?:^|/)spec/"
   TargetRubyVersion: 2.4
 
 #################### Layout ###########################
@@ -236,7 +233,7 @@ Metrics/AbcSize:
   Enabled: false
 
 Metrics/BlockLength:
-  ExcludedMethods: ["describe", "context", "shared_examples"]
+  AllowedMethods: ["describe", "context", "shared_examples"]
   Exclude:
     - config/environments/**
 
@@ -880,7 +877,6 @@ RSpec/IteratedExpectation:
 RSpec/EmptyExampleGroup:
   Description: Checks if an example group does not include any tests.
   Enabled: true
-  CustomIncludeMethods: []
   StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/EmptyExampleGroup
 
 RSpec/EmptyLineAfterExampleGroup:
@@ -1013,11 +1009,6 @@ RSpec/InstanceVariable:
   AssignmentOnly: false
   Enabled: false
   StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/InstanceVariable
-
-RSpec/InvalidPredicateMatcher:
-  Description: Checks invalid usage for predicate matcher.
-  Enabled: true
-  StyleGuide: http://www.rubydoc.info/gems/rubocop-rspec/RuboCop/Cop/RSpec/InvalidPredicateMatcher
 
 RSpec/ItBehavesLike:
   Description: Checks that only one `it_behaves_like` style is used.
