@@ -46,7 +46,8 @@ jobs:
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3 --without development
       - name: Run Rubocop
-        if: matrix.ruby != 'truffleruby'
+        if: |
+          matrix.ruby != 'truffleruby' || matrix.ruby >= 2.6
         run: bundle exec rubocop --parallel
       - name: Run all tests
         run: bundle exec rake
